@@ -105,13 +105,21 @@ public class User {
     public void setReactions(ArrayList<Reaction> reactions) {
         this.reactions = reactions;
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
+    public ArrayList<User> getSubscribed() {
+        return subscribed;
+    }
+
+    public void setSubscribed(ArrayList<User> subscribed) {
+        this.subscribed = subscribed;
+    }
+
+    public ArrayList<User> getSubscribers() {
+        return subscribers;
+    }
+
+    public void setSubscribers(ArrayList<User> subscribers) {
+        this.subscribers = subscribers;
+    }
     
 }
