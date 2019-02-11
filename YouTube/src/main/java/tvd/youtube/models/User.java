@@ -18,6 +18,8 @@ public class User {
     private ArrayList<Video> videos;
     private ArrayList<Playlist> playlists;
     private ArrayList<Reaction> reactions;
+    private ArrayList<User> subscribed;
+    private ArrayList<User> subscribers;
 
     public User(String name, String email, String password, LocalDateTime birthday, String role) {
         this.name = name;
@@ -28,6 +30,8 @@ public class User {
         this.videos = new ArrayList<>();
         this.playlists = new ArrayList<>();
         this.reactions = new ArrayList<>();
+        this.subscribed = new ArrayList<>();
+        this.subscribers = new ArrayList<>();
     }
 
     public int getId() {
