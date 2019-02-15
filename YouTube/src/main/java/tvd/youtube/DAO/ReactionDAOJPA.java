@@ -6,28 +6,45 @@
 package tvd.youtube.DAO;
 
 import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import tvd.youtube.models.Reaction;
-import tvd.youtube.models.User;
 
 /**
  *
  * @author Laptop_Thomas
  */
-public class ReactionDAOJPA implements ReactionDAO{
+@Stateless
+public class ReactionDAOJPA extends EntityDAO<Reaction> implements ReactionDAO{
+    
+    EntityManager em;
+
+    public ReactionDAOJPA() {
+        super(Reaction.class);
+    }
+
 
     @Override
     public void react(Reaction reaction) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.persist(reaction);
     }
 
     @Override
-    public ArrayList<Reaction> getAllReactions() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Reaction> getAllReactions() {
+        Query query = em.createNamedQuery("SELECT R FROM REACTION R");
+        return query.getResultList();
     }
 
     @Override
     public ArrayList<Reaction> getAllReactionsFromVideo(int videoId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
     }
     
 }

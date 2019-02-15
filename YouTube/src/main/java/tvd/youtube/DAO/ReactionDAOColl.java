@@ -6,6 +6,7 @@
 package tvd.youtube.DAO;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import tvd.youtube.models.Reaction;
 
@@ -24,12 +25,12 @@ public class ReactionDAOColl implements ReactionDAO{
     }
 
     @Override
-    public ArrayList<Reaction> getAllReactions() {
+    public List<Reaction> getAllReactions() {
         return this.reactions;
     }
 
     @Override
-    public ArrayList<Reaction> getAllReactionsFromVideo(int videoId) {
+    public List<Reaction> getAllReactionsFromVideo(int videoId) {
         ArrayList<Reaction> values = new ArrayList<>();
         for (Reaction reaction : this.reactions){
             if (reaction.getVideo().getId() == videoId){

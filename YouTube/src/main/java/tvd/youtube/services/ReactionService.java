@@ -1,6 +1,6 @@
 package tvd.youtube.services;
 
-import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import tvd.youtube.DAO.ReactionDAO;
@@ -19,11 +19,11 @@ public class ReactionService {
         reactionDAO.react(react);
     }
     
-    public ArrayList<Reaction> getAllReactions(){
+    public List<Reaction> getAllReactions(){
         return reactionDAO.getAllReactions();
     }
     
-    public ArrayList<Reaction> getAllReactionsFromVideo(int video){
+    public List<Reaction> getAllReactionsFromVideo(int video){
         return reactionDAO.getAllReactionsFromVideo(video);
     }
     

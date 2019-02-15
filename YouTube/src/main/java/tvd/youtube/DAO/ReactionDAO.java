@@ -1,8 +1,7 @@
 package tvd.youtube.DAO;
 
-import java.util.ArrayList;
+import java.util.List;
 import tvd.youtube.models.Reaction;
-import tvd.youtube.models.User;
 
 /**
  *
@@ -12,7 +11,7 @@ public interface ReactionDAO {
    
     void react(Reaction reaction);
     
-    ArrayList<Reaction> getAllReactions();
+    List<Reaction> getAllReactions();
     
-    ArrayList<Reaction> getAllReactionsFromVideo(int videoId);
+    List<Reaction> getAllReactionsFromVideo(int videoId);
 }
