@@ -123,4 +123,8 @@ public class User {
         this.subscribers = subscribers;
     }
     
+    public void update(User u){
+        this.setName(u.getName());
+    }
+    
 }
