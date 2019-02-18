@@ -51,6 +51,11 @@ public class Playlist {
         this.creator = creator;
     }
     
+    public void update(Playlist p){
+        this.setName(p.getName());
+        this.setVideos(p.getVideos());
+    }
+    
     
     
     

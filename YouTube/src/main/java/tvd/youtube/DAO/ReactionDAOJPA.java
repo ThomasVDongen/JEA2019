@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import tvd.youtube.models.Reaction;
 
@@ -17,28 +18,28 @@ import tvd.youtube.models.Reaction;
  * @author Laptop_Thomas
  */
 @Stateless
-public class ReactionDAOJPA extends EntityDAO<Reaction> implements ReactionDAO{
-    
+public class ReactionDAOJPA extends EntityDAO<Reaction> implements ReactionDAO {
+
+    @PersistenceContext
     EntityManager em;
 
     public ReactionDAOJPA() {
         super(Reaction.class);
     }
 
-
     @Override
-    public void react(Reaction reaction) {
-        em.persist(reaction);
+    public void create(Reaction reaction) {
+        super.create(reaction);
     }
 
     @Override
     public List<Reaction> getAllReactions() {
-        Query query = em.createNamedQuery("SELECT R FROM REACTION R");
+        Query query = em.createQuery("SELECT R FROM REACTION R");
         return query.getResultList();
     }
 
     @Override
-    public ArrayList<Reaction> getAllReactionsFromVideo(int videoId) {
+    public List<Reaction> getAllReactionsFromVideo(int videoId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -46,5 +47,20 @@ public class ReactionDAOJPA extends EntityDAO<Reaction> implements ReactionDAO{
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
+    @Override
+    public Reaction find(int id) {
+        return super.find(id);
+    }
+
+    @Override
+    public void edit(Reaction r) {
+        super.edit(r);
+    }
+
+    @Override
+    public void remove(Reaction r) {
+        super.remove(r);
+    }
+
 }

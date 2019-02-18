@@ -20,11 +20,6 @@ public class ReactionDAOColl implements ReactionDAO{
     private ArrayList<Reaction> reactions = new ArrayList<>();
 
     @Override
-    public void react(Reaction reaction) {
-        this.reactions.add(reaction);
-    }
-
-    @Override
     public List<Reaction> getAllReactions() {
         return this.reactions;
     }
@@ -39,5 +34,33 @@ public class ReactionDAOColl implements ReactionDAO{
         }
         return values;
     }
+
+    @Override
+    public void create(Reaction reaction) {
+        this.reactions.add(reaction);
+    }
+
+    @Override
+    public Reaction find(int id) {
+        for (Reaction reaction : this.reactions){
+            if (reaction.getId() == id){
+                return reaction;
+            }
+        }
+        return null;
+    }
     
+    @Override
+    public void remove(Reaction reaction){
+        this.reactions.remove(reaction);
+    }
+
+    @Override
+    public void edit(Reaction reaction) {
+        for (Reaction r : this.reactions){
+            if (r.getId() == reaction.getId()){
+                r.update(reaction);
+            }
+        }
+    }
 }

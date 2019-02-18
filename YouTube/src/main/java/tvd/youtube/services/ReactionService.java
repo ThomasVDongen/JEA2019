@@ -12,11 +12,23 @@ import tvd.youtube.models.Reaction;
  */
 @Stateless
 public class ReactionService {
+    
     @Inject
     private ReactionDAO reactionDAO;
     
-    public void react(Reaction react){
-        reactionDAO.react(react);
+    public void create(Reaction react){
+        reactionDAO.create(react);
+    }
+    public void edit(Reaction react){
+        reactionDAO.edit(react);
+    }
+    
+    public void remove(Reaction react){
+        reactionDAO.remove(react);
+    }
+    
+    public Reaction find(int id){
+        return reactionDAO.find(id);
     }
     
     public List<Reaction> getAllReactions(){

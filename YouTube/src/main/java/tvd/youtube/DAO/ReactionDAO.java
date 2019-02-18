@@ -8,8 +8,14 @@ import tvd.youtube.models.Reaction;
  * @author Laptop_Thomas
  */
 public interface ReactionDAO {
-   
-    void react(Reaction reaction);
+    
+    void create(Reaction reaction);
+    
+    Reaction find(int id);
+    
+    void remove(Reaction reaction);
+    
+    void edit(Reaction reaction);
     
     List<Reaction> getAllReactions();
     

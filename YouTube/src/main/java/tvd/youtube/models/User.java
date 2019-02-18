@@ -1,5 +1,6 @@
 package tvd.youtube.models;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private LocalDateTime birthday;
+    private LocalDate birthday;
     private String role;
     
     private ArrayList<Video> videos;
@@ -21,7 +22,7 @@ public class User {
     private ArrayList<User> subscribed;
     private ArrayList<User> subscribers;
 
-    public User(String name, String email, String password, LocalDateTime birthday, String role) {
+    public User(String name, String email, String password, LocalDate birthday, String role) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -66,11 +67,11 @@ public class User {
         this.password = password;
     }
 
-    public LocalDateTime getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDateTime birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
