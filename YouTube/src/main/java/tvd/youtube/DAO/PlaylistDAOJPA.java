@@ -16,7 +16,7 @@ import tvd.youtube.models.Playlist;
  *
  * @author Laptop_Thomas
  */
-@Stateless
+@Stateless @JPA
 public class PlaylistDAOJPA extends EntityDAO<Playlist> implements PlaylistDAO{
     @PersistenceContext
     EntityManager em;

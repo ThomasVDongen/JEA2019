@@ -7,14 +7,15 @@ package tvd.youtube.DAO;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import tvd.youtube.models.Video;
 
 /**
  *
  * @author Laptop_Thomas
  */
-@ApplicationScoped
+@Stateless @Default
 public class VideoDAOColl implements VideoDAO{
     
     List<Video> videos;

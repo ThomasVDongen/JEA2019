@@ -7,14 +7,15 @@ package tvd.youtube.DAO;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import tvd.youtube.models.Playlist;
 
 /**
  *
  * @author Laptop_Thomas
  */
-@ApplicationScoped
+@Stateless @Default
 public class PlaylistDAOColl implements PlaylistDAO{
     
     private List<Playlist> playlists = new ArrayList<>();

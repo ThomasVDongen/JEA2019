@@ -16,7 +16,7 @@ import tvd.youtube.models.Reaction;
  *
  * @author Laptop_Thomas
  */
-@Stateless
+@Stateless @JPA
 public class ReactionDAOJPA extends EntityDAO<Reaction> implements ReactionDAO {
 
     @PersistenceContext

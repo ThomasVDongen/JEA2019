@@ -6,24 +6,22 @@
 package tvd.youtube.DAO;
 
 import java.util.List;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import tvd.youtube.models.User;
+import tvd.youtube.models.Video;
 
 /**
  *
  * @author Laptop_Thomas
  */
-@Stateless @JPA
-public class UserDAOJPA extends EntityDAO<User> implements UserDAO{
-
+public class VideoDAOJPA extends EntityDAO<Video> implements VideoDAO{
+    
     @PersistenceContext
     EntityManager em;
-    
-    public UserDAOJPA() {
-        super(User.class);
+
+    public VideoDAOJPA() {
+        super(Video.class);
     }
 
     @Override
@@ -32,14 +30,19 @@ public class UserDAOJPA extends EntityDAO<User> implements UserDAO{
     }
 
     @Override
-    public User find(int id) {
+    public Video find(int id) {
         return super.find(id);
     }
 
     @Override
-    public List<User> getAllUsers() {
-        Query query = em.createQuery("Select u from User u");
-        return query.getResultList();
+    public List<Video> getAllVideos() {
+        Query q = em.createQuery("Select V from Video v");
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Video> getVideosByUser(int userid) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
