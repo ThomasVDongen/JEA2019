@@ -31,26 +31,6 @@ public class PlaylistDAOJPA extends EntityDAO<Playlist> implements PlaylistDAO{
     }
 
     @Override
-    public Playlist find(int id) {
-        return super.find(id);
-    }
-    
-    @Override
-    public void create(Playlist p){
-        super.create(p);
-    }
-    
-    @Override
-    public void edit(Playlist p){
-        super.edit(p);
-    }
-    
-    @Override
-    public void remove(Playlist p){
-        super.remove(p);
-    }
-
-    @Override
     public List<Playlist> getAllPlaylists() {
         Query query = em.createQuery("Select P from Playlist P");
         return query.getResultList();
@@ -59,6 +39,11 @@ public class PlaylistDAOJPA extends EntityDAO<Playlist> implements PlaylistDAO{
     @Override
     public List<Playlist> getAllPLaylistsByUser(int userid) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Playlist find(int id) {
+         return super.find(id);
     }
     
 }

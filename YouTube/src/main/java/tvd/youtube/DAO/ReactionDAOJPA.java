@@ -25,12 +25,7 @@ public class ReactionDAOJPA extends EntityDAO<Reaction> implements ReactionDAO {
     public ReactionDAOJPA() {
         super(Reaction.class);
     }
-
-    @Override
-    public void create(Reaction reaction) {
-        super.create(reaction);
-    }
-
+    
     @Override
     public List<Reaction> getAllReactions() {
         Query query = em.createQuery("SELECT R FROM REACTION R");
@@ -51,15 +46,4 @@ public class ReactionDAOJPA extends EntityDAO<Reaction> implements ReactionDAO {
     public Reaction find(int id) {
         return super.find(id);
     }
-
-    @Override
-    public void edit(Reaction r) {
-        super.edit(r);
-    }
-
-    @Override
-    public void remove(Reaction r) {
-        super.remove(r);
-    }
-
 }

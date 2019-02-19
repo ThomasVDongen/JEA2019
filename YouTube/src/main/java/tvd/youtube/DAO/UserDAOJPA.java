@@ -35,21 +35,6 @@ public class UserDAOJPA extends EntityDAO<User> implements UserDAO{
     public User find(int id) {
         return super.find(id);
     }
-    
-    @Override
-    public void edit(User u){
-        super.edit(u);
-    }
-    
-    @Override
-    public void remove(User u){
-        super.remove(u);
-    }
-    
-    @Override
-    public void create(User u){
-        super.create(u);
-    }
 
     @Override
     public List<User> getAllUsers() {
