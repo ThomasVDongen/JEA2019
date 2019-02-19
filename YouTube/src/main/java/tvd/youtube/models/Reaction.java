@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -20,7 +21,9 @@ public class Reaction {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String text;
+    @OneToOne
     private User sender;
+    @OneToOne
     private Video video;
     private LocalDateTime time;
 
