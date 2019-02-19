@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -21,6 +22,8 @@ public class Video {
     private LocalDateTime uploadTime;
     @OneToMany
     private ArrayList<Reaction> reactions;
+    @ManyToOne
+    private User uploader;
 
     public Video(String name, String description, LocalDateTime uploadTime) {
         this.name = name;
@@ -67,6 +70,26 @@ public class Video {
 
     public void setReactions(ArrayList<Reaction> reactions) {
         this.reactions = reactions;
+    }
+
+    public User getUploader() {
+        return uploader;
+    }
+
+    public void setUploader(User uploader) {
+        this.uploader = uploader;
+    }
+    
+    
+    
+    
+    /***
+     * Update name and description off video
+     * @param v 
+     */
+    public void update(Video v){
+        this.name = v.name;
+        this.description = v.description;
     }
     
     
