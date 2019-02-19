@@ -38,5 +38,10 @@ public class ReactionService {
     public List<Reaction> getAllReactionsFromVideo(int video){
         return reactionDAO.getAllReactionsFromVideo(video);
     }
+
+    public ReactionService() {
+    }
+    
+    
     
 }
