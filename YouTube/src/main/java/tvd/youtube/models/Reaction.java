@@ -6,12 +6,18 @@
 package tvd.youtube.models;
 
 import java.time.LocalDateTime;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author Laptop_Thomas
  */
+@Entity
 public class Reaction {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String text;
     private User sender;

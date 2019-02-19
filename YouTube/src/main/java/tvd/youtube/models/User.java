@@ -1,25 +1,41 @@
 package tvd.youtube.models;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Laptop_Thomas
  */
+@Entity
 public class User {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    @Column(unique = true)
     private String email;
     private String password;
     private LocalDate birthday;
     private String role;
+    @Column(unique = true)
+    private String url;
     
+    @OneToMany
     private ArrayList<Video> videos;
+    @OneToMany
     private ArrayList<Playlist> playlists;
+    @OneToMany
     private ArrayList<Reaction> reactions;
+    @ManyToMany(mappedBy = "subscribedto", fetch = FetchType.LAZY)
     private ArrayList<User> subscribed;
+    @ManyToMany
     private ArrayList<User> subscribers;
 
     public User(String name, String email, String password, LocalDate birthday, String role) {
