@@ -21,6 +21,12 @@ public class ReactionDAOColl implements ReactionDAO{
     
     Map<Integer,Reaction> reactionmap;
 
+    public ReactionDAOColl() {
+        reactionmap = new HashMap<>();
+    }
+    
+    
+
     @Override
     public List<Reaction> getAllReactions() {
         return (List)this.reactionmap.values();
