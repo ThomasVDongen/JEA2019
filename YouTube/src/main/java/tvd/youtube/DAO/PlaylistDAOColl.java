@@ -6,7 +6,9 @@
 package tvd.youtube.DAO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import tvd.youtube.models.Playlist;
@@ -18,30 +20,30 @@ import tvd.youtube.models.Playlist;
 @Stateless @Default
 public class PlaylistDAOColl implements PlaylistDAO{
     
-    private List<Playlist> playlists = new ArrayList<>();
+    Map<Integer, Playlist> playlistmap;
+
+    public PlaylistDAOColl() {
+        this.playlistmap = new HashMap<>();
+    }
 
     @Override
     public void create(Playlist p) {
-        this.playlists.add(p);
+        this.playlistmap.put(p.getId(), p);
     }
 
     @Override
     public void remove(Playlist p) {
-        this.playlists.remove(p);
+        this.playlistmap.remove(p.getId());
     }
 
     @Override
     public void edit(Playlist p) {
-        for (Playlist playlist : this.playlists){
-            if (playlist.getId() == p.getId()){
-                playlist.update(p);
-            }
-        }
+       this.playlistmap.replace(p.getId(), p);
     }
 
     @Override
     public Playlist find(int id) {
-        for (Playlist p : this.playlists){
+        for (Playlist p : this.playlistmap.values()){
             if (p.getId() == id){
                 return p;
             }
@@ -51,13 +53,13 @@ public class PlaylistDAOColl implements PlaylistDAO{
 
     @Override
     public List<Playlist> getAllPlaylists() {
-        return this.playlists;
+        return (List)this.playlistmap.values();
     }
 
     @Override
-    public List<Playlist> getAllPLaylistsByUser(int userid) {
+    public List<Playlist> getAllPlaylistsByUser(int userid) {
         List<Playlist> lists = new ArrayList<>();
-        for (Playlist p : this.playlists){
+        for (Playlist p : this.playlistmap.values()){
             if (p.getCreator().getId() == userid){
                 lists.add(p);
             }

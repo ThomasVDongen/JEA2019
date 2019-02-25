@@ -25,12 +25,15 @@ public class Video {
     @ManyToOne
     private User uploader;
 
-    public Video(String name, String description, LocalDateTime uploadTime) {
+    public Video(String name, String description, LocalDateTime uploadTime, User uploader) {
         this.name = name;
         this.description = description;
         this.uploadTime = uploadTime;
+        this.uploader = uploader;
         this.reactions = new ArrayList<>();
     }
+
+
 
     public int getId() {
         return id;
@@ -78,18 +81,6 @@ public class Video {
 
     public void setUploader(User uploader) {
         this.uploader = uploader;
-    }
-    
-    
-    
-    
-    /***
-     * Update name and description off video
-     * @param v 
-     */
-    public void update(Video v){
-        this.name = v.name;
-        this.description = v.description;
     }
     
     

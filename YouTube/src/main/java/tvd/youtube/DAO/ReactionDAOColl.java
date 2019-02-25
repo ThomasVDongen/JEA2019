@@ -7,6 +7,7 @@ package tvd.youtube.DAO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import tvd.youtube.models.Reaction;
@@ -18,17 +19,17 @@ import tvd.youtube.models.Reaction;
 @Stateless @Default
 public class ReactionDAOColl implements ReactionDAO{
     
-    private ArrayList<Reaction> reactions = new ArrayList<>();
+    Map<Integer,Reaction> reactionmap;
 
     @Override
     public List<Reaction> getAllReactions() {
-        return this.reactions;
+        return (List)this.reactionmap.values();
     }
-
+    
     @Override
     public List<Reaction> getAllReactionsFromVideo(int videoId) {
         ArrayList<Reaction> values = new ArrayList<>();
-        for (Reaction reaction : this.reactions){
+        for (Reaction reaction : this.reactionmap.values()){
             if (reaction.getVideo().getId() == videoId){
                 values.add(reaction);
             }
@@ -38,12 +39,12 @@ public class ReactionDAOColl implements ReactionDAO{
 
     @Override
     public void create(Reaction reaction) {
-        this.reactions.add(reaction);
+        this.reactionmap.put(reaction.getId(), reaction);
     }
 
     @Override
     public Reaction find(int id) {
-        for (Reaction reaction : this.reactions){
+        for (Reaction reaction : this.reactionmap.values()){
             if (reaction.getId() == id){
                 return reaction;
             }
@@ -53,15 +54,11 @@ public class ReactionDAOColl implements ReactionDAO{
     
     @Override
     public void remove(Reaction reaction){
-        this.reactions.remove(reaction);
+        this.reactionmap.remove(reaction.getId());
     }
 
     @Override
     public void edit(Reaction reaction) {
-        for (Reaction r : this.reactions){
-            if (r.getId() == reaction.getId()){
-                r.update(reaction);
-            }
-        }
+        reactionmap.replace(reaction.getId(), reaction);
     }
 }

@@ -21,11 +21,26 @@ public class Playlist {
     private ArrayList<Video> videos;
     private User creator;
 
-    public Playlist(String name, ArrayList<Video> videos, User creator) {
+    public Playlist(String name, User creator) {
         this.name = name;
-        this.videos = videos;
+        this.videos = new ArrayList<>();
         this.creator = creator;
     }
+
+    /**
+     * Constructor for unit test
+     * @param id
+     * @param name
+     * @param creator 
+     */
+    public Playlist(int id, String name, User creator) {
+        this.id = id;
+        this.name = name;
+        this.creator = creator;
+        this.videos = new ArrayList<>();
+    }
+    
+    
 
     public int getId() {
         return id;
@@ -59,6 +74,10 @@ public class Playlist {
         this.creator = creator;
     }
     
+    /***
+     * Update name and videos from a playlist
+     * @param p 
+     */
     public void update(Playlist p){
         this.setName(p.getName());
         this.setVideos(p.getVideos());

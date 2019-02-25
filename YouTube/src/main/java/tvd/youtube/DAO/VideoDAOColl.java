@@ -6,7 +6,9 @@
 package tvd.youtube.DAO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import tvd.youtube.models.Video;
@@ -18,30 +20,30 @@ import tvd.youtube.models.Video;
 @Stateless @Default
 public class VideoDAOColl implements VideoDAO{
     
-    List<Video> videos;
+   Map<Integer, Video> videomap;
 
     public VideoDAOColl() {
-        this.videos = new ArrayList<>();
+        this.videomap = new HashMap<>();
     }
 
     @Override
     public void create(Video v) {
-        this.videos.add(v);
+        this.videomap.put(v.getId(), v);
     }
 
     @Override
     public void remove(Video v) {
-        this.videos.remove(v);
+        this.videomap.remove(v.getId());
     }
 
     @Override
     public void edit(Video v) {
-        this.find(v.getId()).update(v);
+        this.videomap.replace(v.getId(), v);        
     }
 
     @Override
     public Video find(int id) {
-        for (Video video : this.videos){
+        for (Video video : this.videomap.values()){
             if (id == video.getId()){
                 return video;
             }
@@ -51,13 +53,13 @@ public class VideoDAOColl implements VideoDAO{
 
     @Override
     public List<Video> getAllVideos() {
-        return this.videos;
+        return (List)this.videomap.values();
     }
 
     @Override
     public List<Video> getVideosByUser(int userid) {
         List<Video> values = new ArrayList<>();
-        for (Video v : this.videos){
+        for (Video v : this.videomap.values()){
             if (v.getUploader().getId() == userid){
                 values.add(v);
             }

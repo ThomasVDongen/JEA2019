@@ -7,6 +7,7 @@ package tvd.youtube.DAO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.enterprise.context.ApplicationScoped;
 import tvd.youtube.models.User;
 
@@ -17,16 +18,16 @@ import tvd.youtube.models.User;
 @ApplicationScoped
 public class UserDAOColl implements UserDAO{
     
-    List<User> users = new ArrayList<>();
+    Map<Integer, User> usermap;
 
     @Override
     public void create(User u) {
-        this.users.add(u);
+        this.usermap.put(u.getId(), u);
     }
 
     @Override
     public User find(int id) {
-        for (User u : this.users){
+        for (User u : this.usermap.values()){
             if (u.getId() == id){
                 return u;
             }
@@ -36,21 +37,17 @@ public class UserDAOColl implements UserDAO{
 
     @Override
     public void remove(User u) {
-        this.users.remove(u);
+        this.usermap.remove(u.getId());
     }
 
     @Override
     public void edit(User user) {
-        for (User u : this.users){
-            if (u.getId() == user.getId() ){
-                u.update(user);
-            }
-        }
+        this.usermap.replace(user.getId(), user);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return this.users;
+        return (List)this.usermap.values();
     }
     
 }

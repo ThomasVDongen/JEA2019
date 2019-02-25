@@ -37,7 +37,7 @@ public class PlaylistDAOJPA extends EntityDAO<Playlist> implements PlaylistDAO{
     }
 
     @Override
-    public List<Playlist> getAllPLaylistsByUser(int userid) {
+    public List<Playlist> getAllPlaylistsByUser(int userid) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
