@@ -33,10 +33,15 @@ public class User {
     private ArrayList<Playlist> playlists;
     @OneToMany
     private ArrayList<Reaction> reactions;
-    @ManyToMany(mappedBy = "subscribedto", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "subscribers", fetch = FetchType.LAZY)
     private ArrayList<User> subscribed;
     @ManyToMany
     private ArrayList<User> subscribers;
+
+    public User() {
+    }
+    
+    
 
     public User(String name, String email, String password, LocalDate birthday, String role) {
         this.name = name;

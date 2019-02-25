@@ -6,6 +6,7 @@
 package tvd.youtube.DAO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.enterprise.context.ApplicationScoped;
@@ -20,6 +21,10 @@ public class UserDAOColl implements UserDAO{
     
     Map<Integer, User> usermap;
 
+    public UserDAOColl() {
+        this.usermap = new HashMap<>();
+    }
+    
     @Override
     public void create(User u) {
         this.usermap.put(u.getId(), u);

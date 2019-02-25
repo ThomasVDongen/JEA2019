@@ -5,7 +5,11 @@
  */
 package tvd.youtube.services;
 
+import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
+import tvd.youtube.DAO.UserDAO;
+import tvd.youtube.models.User;
 
 /**
  *
@@ -13,5 +17,28 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class UserService {
+    
+    @Inject
+    UserDAO userdao;
+    
+    public void create(User u){
+        userdao.create(u);
+    }
+    
+    public void edit(User u){
+        userdao.edit(u);               
+    }
+    
+    public void remove(User u){
+        userdao.remove(u);
+    }
+    
+    public User find(int id){
+        return userdao.find(id);
+    }
+    
+    public List<User> getAllUsers(){
+        return userdao.getAllUsers();
+    }
     
 }

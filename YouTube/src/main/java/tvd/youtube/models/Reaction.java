@@ -27,6 +27,11 @@ public class Reaction {
     private Video video;
     private LocalDateTime time;
 
+    public Reaction() {
+    }
+    
+    
+
     public Reaction(String text, User sender, Video video) {
         this.text = text;
         this.sender = sender;

@@ -13,29 +13,30 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import tvd.youtube.models.Reaction;
-import tvd.youtube.services.ReactionService;
+import tvd.youtube.models.User;
+import tvd.youtube.services.UserService;
 
 /**
  *
  * @author Laptop_Thomas
  */
-@Path("reaction")
+@Path("user")
 @Stateless
-public class ReactionResource {
+public class UserResource {
     
     @Inject
-    ReactionService rs;
+    UserService us;
     
     @GET
-    public List<Reaction> getAll(){
-        return rs.getAllReactions();
+    public List<User> getAll(){
+        return us.getAllUsers();
     }
     
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Reaction getReaction(@PathParam("id") int id){
-        return rs.find(id);
+    public User getUser(@PathParam("id") int id){
+        return us.find(id);
     }
+    
 }

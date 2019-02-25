@@ -25,6 +25,11 @@ public class Video {
     @ManyToOne
     private User uploader;
 
+    public Video() {
+    }
+    
+    
+
     public Video(String name, String description, LocalDateTime uploadTime, User uploader) {
         this.name = name;
         this.description = description;

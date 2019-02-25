@@ -21,6 +21,11 @@ public class Playlist {
     private ArrayList<Video> videos;
     private User creator;
 
+    public Playlist() {
+    }
+    
+    
+
     public Playlist(String name, User creator) {
         this.name = name;
         this.videos = new ArrayList<>();
@@ -40,8 +45,6 @@ public class Playlist {
         this.videos = new ArrayList<>();
     }
     
-    
-
     public int getId() {
         return id;
     }
