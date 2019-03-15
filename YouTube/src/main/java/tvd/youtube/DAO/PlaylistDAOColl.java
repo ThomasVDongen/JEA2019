@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import tvd.youtube.models.Playlist;
 
@@ -17,7 +17,7 @@ import tvd.youtube.models.Playlist;
  *
  * @author Laptop_Thomas
  */
-@Stateless @Default
+@RequestScoped @Default
 public class PlaylistDAOColl implements PlaylistDAO{
     
     Map<Integer, Playlist> playlistmap;

@@ -8,6 +8,7 @@ package tvd.youtube.services;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import tvd.youtube.DAO.JPA;
 import tvd.youtube.DAO.VideoDAO;
 import tvd.youtube.models.Video;
 

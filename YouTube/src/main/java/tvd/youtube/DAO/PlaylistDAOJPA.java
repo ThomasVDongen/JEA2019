@@ -6,7 +6,7 @@
 package tvd.youtube.DAO;
 
 import java.util.List;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -16,7 +16,7 @@ import tvd.youtube.models.Playlist;
  *
  * @author Laptop_Thomas
  */
-@Stateless @JPA
+@RequestScoped @JPA
 public class PlaylistDAOJPA extends EntityDAO<Playlist> implements PlaylistDAO{
     @PersistenceContext
     EntityManager em;

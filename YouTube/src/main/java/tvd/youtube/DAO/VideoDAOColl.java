@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import tvd.youtube.models.Video;
 
@@ -17,7 +17,7 @@ import tvd.youtube.models.Video;
  *
  * @author Laptop_Thomas
  */
-@Stateless @Default
+@RequestScoped @Default
 public class VideoDAOColl implements VideoDAO{
     
    Map<Integer, Video> videomap;

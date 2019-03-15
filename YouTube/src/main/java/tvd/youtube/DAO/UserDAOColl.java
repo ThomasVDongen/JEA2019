@@ -5,18 +5,18 @@
  */
 package tvd.youtube.DAO;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Default;
 import tvd.youtube.models.User;
 
 /**
  *
  * @author Laptop_Thomas
  */
-@ApplicationScoped
+@RequestScoped @Default
 public class UserDAOColl implements UserDAO{
     
     Map<Integer, User> usermap;

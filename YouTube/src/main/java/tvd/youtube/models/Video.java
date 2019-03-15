@@ -88,6 +88,10 @@ public class Video {
         this.uploader = uploader;
     }
     
+    public void addReaction(Reaction r){
+        this.getReactions().add(r);
+    }
+    
     
     
     

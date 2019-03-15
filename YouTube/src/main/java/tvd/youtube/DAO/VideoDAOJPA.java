@@ -6,6 +6,7 @@
 package tvd.youtube.DAO;
 
 import java.util.List;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -15,6 +16,7 @@ import tvd.youtube.models.Video;
  *
  * @author Laptop_Thomas
  */
+@RequestScoped @JPA
 public class VideoDAOJPA extends EntityDAO<Video> implements VideoDAO{
     
     @PersistenceContext
