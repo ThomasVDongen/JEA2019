@@ -46,5 +46,12 @@ public class VideoDAOJPA extends EntityDAO<Video> implements VideoDAO{
     public List<Video> getVideosByUser(int userid) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void saveVideos(List<Video> videos) {
+        for (Video v : videos){
+            em.merge(v);
+        }
+    }
     
 }

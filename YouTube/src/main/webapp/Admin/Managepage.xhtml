@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{lang['managepage.title']}</title>
+        <h:outputStylesheet name="default.css" library="css" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <h1>Videos:</h1>
+            <p:dataTable value="#{manage.videos}" 
+                         var="video">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Title"/>
+                    </f:facet>
+                    <h:outputText value="#{video.name}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Description"/>
+                    </f:facet>
+                    <h:outputText value="#{video.description}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Status" />
+                    </f:facet>
+                    <p:selectOneMenu value="#{user.group}" converter="groupConverter">
+                        <f:selectItems value="#{manage.allGroups}" var="group"
+                                       itemValue="#{group}" itemLabel="#{group.name}"/>
+                    </p:selectOneMenu>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Delete"/>
+                    </f:facet>
+                    <p:commandButton action="#{manage.deleteVideo(video.id)}" value="Delete"/>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Uploader"/>
+                    </f:facet>
+                    <h:outputText value="#{video.user.name}"
+                </p:column>
+            </p:dataTable>
+            <p:commandButton action="#{manage.save()}" value="Save"/>
+            </h:form>
+    </h:body>
+</html>

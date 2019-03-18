@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import util.VideoStatus;
 
 /**
  *
@@ -24,18 +25,20 @@ public class Video {
     private ArrayList<Reaction> reactions;
     @ManyToOne
     private User uploader;
+    private VideoStatus status;
 
     public Video() {
     }
     
     
 
-    public Video(String name, String description, LocalDateTime uploadTime, User uploader) {
+    public Video(String name, String description, LocalDateTime uploadTime, User uploader, VideoStatus status) {
         this.name = name;
         this.description = description;
         this.uploadTime = uploadTime;
         this.uploader = uploader;
         this.reactions = new ArrayList<>();
+        this.status = status;
     }
 
 

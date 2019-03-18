@@ -49,5 +49,8 @@ public class VideoService{
         return dao.getVideosByUser(userid);
     }
     
+    public void saveVideos(List<Video> videos){
+        dao.saveVideos(videos);
+    }
     
 }

@@ -24,4 +24,6 @@ public interface VideoDAO {
     List<Video> getAllVideos();
     
     List<Video> getVideosByUser(int userid);
+
+    public void saveVideos(List<Video> videos);
 }

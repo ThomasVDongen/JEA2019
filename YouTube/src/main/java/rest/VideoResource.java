@@ -22,12 +22,13 @@ import tvd.youtube.models.User;
 import tvd.youtube.models.Video;
 import tvd.youtube.services.UserService;
 import tvd.youtube.services.VideoService;
+import util.VideoStatus;
 
 /**
  *
  * @author Laptop_Thomas
  */
-@Api
+//////@Api
 @Path("video")
 @RequestScoped
 public class VideoResource {
@@ -53,11 +54,11 @@ public class VideoResource {
     }
     
     @POST
-    @Path("{name}/{description}/{userid}")
+    @Path("{name}/{description}/{status}/{userid}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void uploadVideo(@PathParam("name") String name, @PathParam("description") String description, @PathParam("userid") int userid){
-        User u = us.find(userid);
-        Video v = new Video(name, description, LocalDateTime.now(), u);
+    public void uploadVideo(@PathParam("name") String name, @PathParam("description") String description, @PathParam("status") String status, @PathParam("userid") int userid){
+        User u = us.find(userid);       
+        Video v = new Video(name, description, LocalDateTime.now(), u, VideoStatus.valueOf(status));
         vs.create(v);
     }
     
