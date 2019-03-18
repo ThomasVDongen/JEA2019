@@ -28,7 +28,7 @@ import util.VideoStatus;
  *
  * @author Laptop_Thomas
  */
-//////@Api
+@Api
 @Path("video")
 @RequestScoped
 public class VideoResource {
