@@ -32,6 +32,30 @@ public class ManageBean implements Serializable {
     private User currentUser;
     private List<VideoStatus> allStatus;
     private FacesContext fc = FacesContext.getCurrentInstance();
+
+    public List<Video> getAllVideos() {
+        return allVideos;
+    }
+
+    public void setAllVideos(List<Video> allVideos) {
+        this.allVideos = allVideos;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public List<VideoStatus> getAllStatus() {
+        return allStatus;
+    }
+
+    public void setAllStatus(List<VideoStatus> allStatus) {
+        this.allStatus = allStatus;
+    }
     
     @Inject
     VideoService vs;
@@ -44,6 +68,14 @@ public class ManageBean implements Serializable {
 
     public void save() {
         vs.saveVideos(allVideos);
+    }
+    
+    public void deleteVideo(int videoid){ 
+        for (Video v : allVideos){
+            if (v.getId() == videoid){
+                vs.remove(v);
+            }
+        }
     }
 
 }

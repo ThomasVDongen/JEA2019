@@ -53,7 +53,7 @@ public class VideoDAOColl implements VideoDAO{
 
     @Override
     public List<Video> getAllVideos() {
-        return (List)this.videomap.values();
+        return new ArrayList<>(this.videomap.values());
     }
 
     @Override

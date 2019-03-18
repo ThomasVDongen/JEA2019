@@ -90,6 +90,14 @@ public class Video {
     public void setUploader(User uploader) {
         this.uploader = uploader;
     }
+
+    public VideoStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(VideoStatus status) {
+        this.status = status;
+    }
     
     public void addReaction(Reaction r){
         this.getReactions().add(r);

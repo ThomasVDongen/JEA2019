@@ -16,7 +16,7 @@ and open the template in the editor.
     <h:body>
         <h:form>
             <h1>Videos:</h1>
-            <p:dataTable value="#{manage.videos}" 
+            <p:dataTable value="#{manage.allVideos}" 
                          var="video">
                 <p:column>
                     <f:facet name="header">
@@ -34,9 +34,9 @@ and open the template in the editor.
                     <f:facet name="header">
                         <h:outputText value="Status" />
                     </f:facet>
-                    <p:selectOneMenu value="#{user.group}" converter="groupConverter">
-                        <f:selectItems value="#{manage.allGroups}" var="group"
-                                       itemValue="#{group}" itemLabel="#{group.name}"/>
+                    <p:selectOneMenu value="#{video.status}">
+                        <f:selectItems value="#{manage.allStatus}" var="status"
+                                       itemValue="#{status}" itemLabel="#{status}"/>
                     </p:selectOneMenu>
                 </p:column>
                 <p:column>
@@ -50,7 +50,7 @@ and open the template in the editor.
                     <f:facet name="header">
                         <h:outputText value="Uploader"/>
                     </f:facet>
-                    <h:outputText value="#{video.user.name}"
+                    <h:outputText value="#{video.user.name}"/>
                 </p:column>
             </p:dataTable>
             <p:commandButton action="#{manage.save()}" value="Save"/>
