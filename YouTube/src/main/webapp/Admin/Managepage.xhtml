@@ -41,19 +41,18 @@ and open the template in the editor.
                 </p:column>
                 <p:column>
                     <f:facet name="header">
+                        <h:outputText value="Uploader"/>
+                    </f:facet>
+                    <h:outputText value="#{video.uploader.name}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
                         <h:outputText value="Delete"/>
                     </f:facet>
                     <p:commandButton action="#{manage.deleteVideo(video.id)}" value="Delete"/>
                 </p:column>
-
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Uploader"/>
-                    </f:facet>
-                    <h:outputText value="#{video.user.name}"/>
-                </p:column>
             </p:dataTable>
             <p:commandButton action="#{manage.save()}" value="Save"/>
-            </h:form>
+        </h:form>
     </h:body>
 </html>

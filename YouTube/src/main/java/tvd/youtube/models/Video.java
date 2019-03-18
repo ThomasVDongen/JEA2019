@@ -41,6 +41,16 @@ public class Video {
         this.status = status;
     }
 
+    public Video(int id, String name, String description, LocalDateTime uploadtime, User uploader, VideoStatus status) {
+        this.id = id;
+        this.description = description;
+        this.name = name;
+        this.uploadTime = uploadtime;
+        this.uploader = uploader;
+        this.status = status;
+        this.reactions = new ArrayList<>();
+    }
+
 
 
     public int getId() {

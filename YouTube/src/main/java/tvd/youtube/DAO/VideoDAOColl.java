@@ -69,7 +69,10 @@ public class VideoDAOColl implements VideoDAO{
 
     @Override
     public void saveVideos(List<Video> videos) {
-        
+        this.videomap.clear();
+        for (Video v : videos){
+            this.videomap.put(v.getId(), v);
+        }
     }
     
 }
