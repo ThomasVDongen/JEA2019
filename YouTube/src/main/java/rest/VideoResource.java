@@ -18,6 +18,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import tvd.youtube.models.User;
@@ -71,12 +72,10 @@ public class VideoResource {
     }
 
     @POST
-    @Path("{name}/{description}/{status}/{userid}")
+    @Path("/upload")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response uploadVideo(@PathParam("name") String name, @PathParam("description") String description, @PathParam("status") String status, @PathParam("userid") int userid) {
+    public Response uploadVideo(Video v) {
         try {
-            User u = us.find(userid);
-            Video v = new Video(name, description, LocalDateTime.now(), u, VideoStatus.valueOf(status));
             vs.create(v);
             return Response.status(Response.Status.OK).entity("Succes").build();
         } catch (NotFoundException e) {

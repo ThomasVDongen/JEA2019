@@ -7,8 +7,6 @@ package rest;
 
 import io.swagger.annotations.Api;
 import java.time.LocalDate;
-import java.time.Month;
-import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -20,6 +18,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import tvd.youtube.models.User;
@@ -67,11 +66,10 @@ public class UserResource {
     }
 
     @POST
-    @Path("{username}/{password}/{email}/{birthday}")
+    @Path("/register")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response registerUser(@PathParam("username") String username, @PathParam("password") String password, @PathParam("email") String email, @PathParam("birthday") String birthday) {
+    public Response registerUser(User u) {
         try {
-            User u = new User(username, email, password, LocalDate.parse(birthday), "user");
             us.create(u);
             return Response.status(Response.Status.OK).entity("Succes").build();
         } catch (NotFoundException e) {

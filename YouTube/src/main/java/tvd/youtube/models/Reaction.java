@@ -6,10 +6,13 @@
 package tvd.youtube.models;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -26,6 +29,10 @@ public class Reaction {
     @OneToOne
     private Video video;
     private LocalDateTime time;
+    ///Allows reactions to have reactions
+    @OneToMany
+    @JsonbTransient 
+    private List<Reaction> reactions;
 
     public Reaction() {
     }

@@ -17,6 +17,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -74,15 +75,11 @@ public class ReactionResource {
     }
 
     @POST
-    @Path("{videoid}/{text}/{userid}")
+    @Path("/create")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createReaction(@PathParam("videoid") int videoid, @PathParam("text") String text, @PathParam("userid") int userid) {
+    public Response createReaction(Reaction r) {
         try {
-            Video v = vs.find(videoid);
-            User u = us.find(userid);
-            Reaction r = new Reaction(text, u, v);
-            v.addReaction(r);
-            vs.edit(v);
+            rs.create(r);
             return Response.status(Response.Status.OK).entity("Succes").build();
         } catch (NotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
