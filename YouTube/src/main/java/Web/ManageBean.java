@@ -17,6 +17,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import tvd.youtube.models.User;
 import tvd.youtube.models.Video;
+import tvd.youtube.services.UserService;
 import tvd.youtube.services.VideoService;
 import util.VideoStatus;
 
@@ -64,6 +65,8 @@ public class ManageBean implements Serializable {
     
     @Inject
     VideoService vs;
+    @Inject
+    UserService us;
 
     @PostConstruct
     private void init() {
@@ -93,6 +96,12 @@ public class ManageBean implements Serializable {
         Video v2 = new Video("test", "test", LocalDateTime.now(), u, VideoStatus.Public);
         u.getVideos().add(v1);
         u.getVideos().add(v2);
+        
+        User u2 = new User("user2", "test2", "test2", LocalDate.now(), "user");
+        
+        ///u.getSubscribers().add(u2);
+        //us.edit(u);
+        
         vs.saveVideos(u.getVideos());
     }
     

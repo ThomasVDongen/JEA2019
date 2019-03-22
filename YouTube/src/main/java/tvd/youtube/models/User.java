@@ -1,6 +1,7 @@
 package tvd.youtube.models;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,9 +38,11 @@ public class User {
     @OneToMany
     @JoinColumn(name="SENDER_ID")
     private ArrayList<Reaction> reactions;
-    @ManyToMany(mappedBy = "subscribers", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JsonbTransient
     private ArrayList<User> subscribed;
-    @ManyToMany
+    @ManyToMany(mappedBy = "subscribed", fetch = FetchType.LAZY)
+    @JsonbTransient
     private ArrayList<User> subscribers;
 
     public User() {
