@@ -19,7 +19,7 @@ import tvd.youtube.models.Video;
 @Stateless
 public class VideoService{
     
-    @Inject
+    @Inject @JPA
     private VideoDAO dao;
 
     public VideoService() {

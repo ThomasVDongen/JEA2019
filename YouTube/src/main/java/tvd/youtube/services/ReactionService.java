@@ -3,6 +3,7 @@ package tvd.youtube.services;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import tvd.youtube.DAO.JPA;
 import tvd.youtube.DAO.ReactionDAO;
 import tvd.youtube.models.Reaction;
 
@@ -13,7 +14,7 @@ import tvd.youtube.models.Reaction;
 @Stateless
 public class ReactionService {
     
-    @Inject
+    @Inject @JPA
     private ReactionDAO reactionDAO;
     
     public void create(Reaction react){

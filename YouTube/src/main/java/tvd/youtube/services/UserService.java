@@ -8,6 +8,7 @@ package tvd.youtube.services;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import tvd.youtube.DAO.JPA;
 import tvd.youtube.DAO.UserDAO;
 import tvd.youtube.models.User;
 
@@ -18,7 +19,7 @@ import tvd.youtube.models.User;
 @Stateless
 public class UserService {
     
-    @Inject
+    @Inject @JPA
     UserDAO userdao;
     
     public void create(User u){
