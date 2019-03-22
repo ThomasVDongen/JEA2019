@@ -1,15 +1,20 @@
 package Web;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import tvd.youtube.models.User;
 import tvd.youtube.models.Video;
 import tvd.youtube.services.VideoService;
@@ -69,16 +74,17 @@ public class ManageBean implements Serializable {
 
     public void save() {
         vs.saveVideos(allVideos);
+        this.reload();
     }
     
     public void deleteVideo(int videoid){
-        System.out.println(videoid);
         for (Video v : allVideos){
             if (v.getId() == videoid){
-                //vs.remove(v);
+                vs.remove(v);
             }
         }
         this.allVideos = vs.getAllVideos();
+        this.reload();
     }
     
     private void generateVideos(){
@@ -88,5 +94,14 @@ public class ManageBean implements Serializable {
         u.getVideos().add(v1);
         u.getVideos().add(v2);
         vs.saveVideos(u.getVideos());
+    }
+    
+    public void reload() {
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        try {
+            ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+        } catch (IOException ex) {
+            Logger.getLogger(ManageBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

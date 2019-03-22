@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -28,10 +29,13 @@ public class User {
     private String url;
     
     @OneToMany
+    @JoinColumn(name="UPLOADER_ID")
     private ArrayList<Video> videos;
     @OneToMany
+    @JoinColumn(name="CREATOR_ID")
     private ArrayList<Playlist> playlists;
     @OneToMany
+    @JoinColumn(name="SENDER_ID")
     private ArrayList<Reaction> reactions;
     @ManyToMany(mappedBy = "subscribers", fetch = FetchType.LAZY)
     private ArrayList<User> subscribed;
