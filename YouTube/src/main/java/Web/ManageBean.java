@@ -89,8 +89,8 @@ public class ManageBean implements Serializable {
     
     private void generateVideos(){
         User u = new User("user1", "test", "test", LocalDate.now(), "user");
-        Video v1 = new Video(1,"How to ", "how to java ee", LocalDateTime.now(), u, VideoStatus.Public);
-        Video v2 = new Video(2, "test", "test", LocalDateTime.now(), u, VideoStatus.Public);
+        Video v1 = new Video("How to ", "how to java ee", LocalDateTime.now(), u, VideoStatus.Public);
+        Video v2 = new Video("test", "test", LocalDateTime.now(), u, VideoStatus.Public);
         u.getVideos().add(v1);
         u.getVideos().add(v2);
         vs.saveVideos(u.getVideos());
