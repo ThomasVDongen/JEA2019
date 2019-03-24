@@ -96,12 +96,6 @@ public class ManageBean implements Serializable {
         Video v2 = new Video("test", "test", LocalDateTime.now(), u, VideoStatus.Public);
         u.getVideos().add(v1);
         u.getVideos().add(v2);
-        
-        User u2 = new User("user2", "test2", "test2", LocalDate.now(), "user");
-        
-        ///u.getSubscribers().add(u2);
-        //us.edit(u);
-        
         vs.saveVideos(u.getVideos());
     }
     

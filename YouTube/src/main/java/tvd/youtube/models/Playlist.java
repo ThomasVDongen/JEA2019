@@ -88,6 +88,10 @@ public class Playlist {
         this.setVideos(p.getVideos());
     }
     
+    public void addVideo(Video v){
+        this.getVideos().add(v);
+    }
+    
     
     
     

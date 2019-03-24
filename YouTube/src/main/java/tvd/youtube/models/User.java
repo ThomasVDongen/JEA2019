@@ -35,9 +35,6 @@ public class User {
     @OneToMany
     @JoinColumn(name="CREATOR_ID")
     private ArrayList<Playlist> playlists;
-    @OneToMany
-    @JoinColumn(name="SENDER_ID")
-    private ArrayList<Reaction> reactions;
     @ManyToMany(fetch = FetchType.LAZY)
     @JsonbTransient
     private ArrayList<User> subscribed;
@@ -58,7 +55,6 @@ public class User {
         this.role = role;
         this.videos = new ArrayList<>();
         this.playlists = new ArrayList<>();
-        this.reactions = new ArrayList<>();
         this.subscribed = new ArrayList<>();
         this.subscribers = new ArrayList<>();
     }
@@ -127,14 +123,6 @@ public class User {
         this.playlists = playlists;
     }
 
-    public ArrayList<Reaction> getReactions() {
-        return reactions;
-    }
-
-    public void setReactions(ArrayList<Reaction> reactions) {
-        this.reactions = reactions;
-    }
-
     public ArrayList<User> getSubscribed() {
         return subscribed;
     }
@@ -153,6 +141,11 @@ public class User {
     
     public void update(User u){
         this.setName(u.getName());
+    }
+
+    public void subscribeTo(User u) {
+        this.subscribed.add(u);
+        u.getSubscribers().add(this);
     }
     
 }

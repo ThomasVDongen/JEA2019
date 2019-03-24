@@ -6,6 +6,7 @@
 package tvd.youtube.models;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Entity;
@@ -44,6 +45,7 @@ public class Reaction {
         this.sender = sender;
         this.video = video;
         this.time = LocalDateTime.now();
+        this.reactions = new ArrayList<>();
     }
 
     public String getText() {
@@ -90,11 +92,17 @@ public class Reaction {
         this.text = r.getText();
         this.time = LocalDateTime.now();
     }
+
+    public List<Reaction> getReactions() {
+        return reactions;
+    }
+
+    public void setReactions(List<Reaction> reactions) {
+        this.reactions = reactions;
+    }
     
-    
-    
-    
-    
-    
-    
+    public void react(Reaction r){
+        this.getReactions().add(r);
+    }
+
 }

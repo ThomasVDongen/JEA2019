@@ -2,6 +2,7 @@ package tvd.youtube.models;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,7 @@ public class Video {
     private String description;
     private LocalDateTime uploadTime;
     @OneToMany
-    private ArrayList<Reaction> reactions;
+    private List<Reaction> reactions;
     @ManyToOne
     private User uploader;
     private VideoStatus status;
@@ -85,7 +86,7 @@ public class Video {
         this.uploadTime = uploadTime;
     }
 
-    public ArrayList<Reaction> getReactions() {
+    public List<Reaction> getReactions() {
         return reactions;
     }
 
@@ -113,6 +114,9 @@ public class Video {
         this.getReactions().add(r);
     }
     
+    public List<Reaction> getAllReactionsFromReactions(){
+        
+    }
     
     
     

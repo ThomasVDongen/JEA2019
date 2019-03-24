@@ -7,12 +7,13 @@ package tvd.youtube.models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -38,5 +39,17 @@ public class UserTest {
     @After
     public void tearDown() {
     }
+
+    @Test
+    public void testSubscribeTo() {
+        User u = new User("user1", "test", "test", LocalDate.now(), "user");
+        User u2 = new User("user2", "test2", "test2", LocalDate.now(), "user");
+        u2.subscribeTo(u);
+        List<User> testSubscribers = new ArrayList<>();
+        testSubscribers.add(u2);
+        assertEquals(testSubscribers, u.getSubscribers());
+    }
+    
+    
     
 }
