@@ -6,6 +6,7 @@
 package tvd.youtube.models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -14,6 +15,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import util.VideoStatus;
 
 /**
  *
@@ -50,6 +52,7 @@ public class UserTest {
         assertEquals(testSubscribers, u.getSubscribers());
     }
     
+
     
     
 }

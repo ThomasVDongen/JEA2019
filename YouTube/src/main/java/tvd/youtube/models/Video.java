@@ -112,12 +112,7 @@ public class Video {
     
     public void addReaction(Reaction r){
         this.getReactions().add(r);
-    }
-    
-    public List<Reaction> getAllReactionsFromReactions(){
-        
-    }
-    
+    }  
     
     
 }

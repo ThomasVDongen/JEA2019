@@ -7,13 +7,14 @@ package tvd.youtube.models;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import util.VideoStatus;
 
 /**
@@ -47,10 +48,12 @@ public class ReactionTest {
     public void testReact() {
         User u = new User("user1", "test", "test", LocalDate.now(), "user");
         Video v = new Video("How to test reactions", "description", LocalDateTime.now(), u, VideoStatus.Public);
-        Reaction r = new Reaction("Wat een mooie video", u, v);
-        Reaction instance = new Reaction();
+        Reaction r = new Reaction("Ben het echt niet eens met deze mening", u, v);
+        Reaction instance = new Reaction("Wat een mooie video", u, v);
         instance.react(r);
-        
+        List<Reaction> reactions = new ArrayList<>();
+        reactions.add(r);
+        assertEquals(reactions, instance.getReactions());
     }
     
 }

@@ -5,10 +5,17 @@
  */
 package tvd.youtube.models;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
+import util.VideoStatus;
 
 /**
  *
@@ -34,5 +41,18 @@ public class PlaylistTest {
     @After
     public void tearDown() {
     }
+    
+    @Test
+    public void addVideo(){
+        User u = new User("user1", "test", "test", LocalDate.now(), "user");
+        Video v = new Video("playlist unittest", "video about unit testing", LocalDateTime.now(), u, VideoStatus.Public);
+        Playlist p = new Playlist("Testlist",u);
+        List<Video> fakeplaylist = new ArrayList<>();
+        fakeplaylist.add(v);
+        p.addVideo(v);
+        assertEquals(fakeplaylist, p.getVideos());
+    }
+    
+    
     
 }
