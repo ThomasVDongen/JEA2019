@@ -42,4 +42,15 @@ public class UserService {
         return userdao.getAllUsers();
     }
     
+    public User getUserByName(String name){
+        return userdao.getUserByName(name);
+    }
+
+    public void setDAO(UserDAO dao) {
+        if (dao == null){
+            return;
+        }
+        this.userdao = dao;
+    }
+    
 }

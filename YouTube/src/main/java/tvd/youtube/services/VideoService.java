@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import tvd.youtube.DAO.JPA;
 import tvd.youtube.DAO.VideoDAO;
+import tvd.youtube.models.User;
 import tvd.youtube.models.Video;
 
 /**
@@ -45,12 +46,16 @@ public class VideoService{
        return dao.getAllVideos();
     }
     
-    public List<Video> getVideosByUser(int userid) {
-        return dao.getVideosByUser(userid);
+    public List<Video> getVideosByUser(User user) {
+        return dao.getVideosByUser(user);
     }
     
     public void saveVideos(List<Video> videos){
         dao.saveVideos(videos);
+    }
+
+    public void setDAO(VideoDAO dao) {
+        this.dao = dao;
     }
     
 }

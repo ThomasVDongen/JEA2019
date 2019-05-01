@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import tvd.youtube.DAO.JPA;
 import tvd.youtube.DAO.ReactionDAO;
 import tvd.youtube.models.Reaction;
+import tvd.youtube.models.Video;
 
 /**
  *
@@ -36,13 +37,18 @@ public class ReactionService {
         return reactionDAO.getAllReactions();
     }
     
-    public List<Reaction> getAllReactionsFromVideo(int video){
-        return reactionDAO.getAllReactionsFromVideo(video);
+    public List<Reaction> getAllReactionsFromVideo(Video v){
+        return reactionDAO.getAllReactionsFromVideo(v);
     }
 
     public ReactionService() {
     }
     
-    
+    public void setDAO(ReactionDAO dao) {
+        if (dao == null){
+            return;
+        }
+        this.reactionDAO = dao;
+    }
     
 }

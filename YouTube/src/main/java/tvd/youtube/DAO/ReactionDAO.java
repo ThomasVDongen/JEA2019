@@ -2,6 +2,7 @@ package tvd.youtube.DAO;
 
 import java.util.List;
 import tvd.youtube.models.Reaction;
+import tvd.youtube.models.Video;
 
 /**
  *
@@ -19,5 +20,5 @@ public interface ReactionDAO {
     
     List<Reaction> getAllReactions();
     
-    List<Reaction> getAllReactionsFromVideo(int videoId);
+    List<Reaction> getAllReactionsFromVideo(Video v);
 }

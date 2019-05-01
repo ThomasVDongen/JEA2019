@@ -55,4 +55,13 @@ public class UserDAOColl implements UserDAO{
         return (List)this.usermap.values();
     }
     
+    public User getUserByName(String name){
+        for (User u : this.usermap.values()){
+            if (u.getName() == name){
+                return u;
+            }
+        }
+        return null;
+    }
+    
 }

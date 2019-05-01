@@ -23,4 +23,6 @@ public interface UserDAO {
     void edit(User u);
     
     List<User> getAllUsers();
+    
+    User getUserByName(String name);
 }

@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import tvd.youtube.models.Reaction;
+import tvd.youtube.models.Video;
 
 /**
  *
@@ -32,10 +33,10 @@ public class ReactionDAOColl implements ReactionDAO{
     }
     
     @Override
-    public List<Reaction> getAllReactionsFromVideo(int videoId) {
+    public List<Reaction> getAllReactionsFromVideo(Video v) {
         ArrayList<Reaction> values = new ArrayList<>();
         for (Reaction reaction : this.reactionmap.values()){
-            if (reaction.getVideo().getId() == videoId){
+            if (reaction.getVideo().getId() == v.getId()){
                 values.add(reaction);
             }
         }

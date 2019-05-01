@@ -10,6 +10,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import tvd.youtube.models.User;
 import tvd.youtube.models.Video;
 
 /**
@@ -30,6 +31,10 @@ public class VideoDAOJPA extends EntityDAO<Video> implements VideoDAO{
     protected EntityManager getEntityManager() {
         return this.em;
     }
+    
+    public void setEntityManager(EntityManager em){
+        this.em = em;
+    }
 
     @Override
     public Video find(int id) {
@@ -43,8 +48,10 @@ public class VideoDAOJPA extends EntityDAO<Video> implements VideoDAO{
     }
 
     @Override
-    public List<Video> getVideosByUser(int userid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Video> getVideosByUser(User user) {
+        Query q = em.createQuery("Select V from Video v where v.uploader = :userid");
+        q.setParameter("userid", user);
+        return q.getResultList();
     }
 
     @Override

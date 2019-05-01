@@ -42,4 +42,15 @@ public class UserDAOJPA extends EntityDAO<User> implements UserDAO{
         return query.getResultList();
     }
     
+    public User getUserByName(String name){
+        Query query = em.createQuery("SELECT u FROM User u where u.name = :name");
+        query.setParameter("name", name);
+        return (User) query.getSingleResult();
+    }
+
+    //method for testing with entiymanager
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
+    }
+    
 }

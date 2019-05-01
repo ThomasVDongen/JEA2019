@@ -7,6 +7,7 @@ package tvd.youtube.DAO;
 
 import java.util.List;
 import tvd.youtube.models.Playlist;
+import tvd.youtube.models.User;
 
 /**
  *
@@ -24,5 +25,5 @@ public interface PlaylistDAO {
     
     List<Playlist> getAllPlaylists();
     
-    List<Playlist> getAllPlaylistsByUser(int userid);
+    List<Playlist> getAllPlaylistsByUser(User u);
 }

@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import tvd.youtube.DAO.JPA;
 import tvd.youtube.DAO.PlaylistDAO;
 import tvd.youtube.models.Playlist;
+import tvd.youtube.models.User;
 
 /**
  *
@@ -42,6 +43,14 @@ public class PlaylistService {
     
     public List<Playlist> getAllPlaylists(){
         return playlistDAO.getAllPlaylists();
+    }
+    
+    public List<Playlist> getPlaylistsbyUser(User u){
+        return playlistDAO.getAllPlaylistsByUser(u);
+    }
+
+    public void setDAO(PlaylistDAO playlistDao) {
+        this.playlistDAO = playlistDao;
     }
     
 }

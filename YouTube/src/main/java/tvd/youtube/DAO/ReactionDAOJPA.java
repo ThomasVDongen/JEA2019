@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import tvd.youtube.models.Reaction;
+import tvd.youtube.models.Video;
 
 /**
  *
@@ -28,13 +29,15 @@ public class ReactionDAOJPA extends EntityDAO<Reaction> implements ReactionDAO {
     
     @Override
     public List<Reaction> getAllReactions() {
-        Query query = em.createQuery("SELECT R FROM REACTION R");
+        Query query = em.createQuery("SELECT R FROM Reaction R");
         return query.getResultList();
     }
 
     @Override
-    public List<Reaction> getAllReactionsFromVideo(int videoId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Reaction> getAllReactionsFromVideo(Video video) {
+        Query query = em.createQuery("SELECT r FROM Reaction r where r.video = :video");
+        query.setParameter("video", video);
+        return query.getResultList();
     }
 
     @Override
@@ -45,5 +48,9 @@ public class ReactionDAOJPA extends EntityDAO<Reaction> implements ReactionDAO {
     @Override
     public Reaction find(int id) {
         return super.find(id);
+    }
+
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
     }
 }

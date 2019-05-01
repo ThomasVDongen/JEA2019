@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import tvd.youtube.models.Playlist;
+import tvd.youtube.models.User;
 
 /**
  *
@@ -37,13 +38,19 @@ public class PlaylistDAOJPA extends EntityDAO<Playlist> implements PlaylistDAO{
     }
 
     @Override
-    public List<Playlist> getAllPlaylistsByUser(int userid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Playlist> getAllPlaylistsByUser(User u) {
+        Query q = em.createQuery("Select p from Playlist p where p.creator = :user");
+        q.setParameter("user", u);
+        return q.getResultList();
     }
 
     @Override
     public Playlist find(int id) {
          return super.find(id);
+    }
+
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
     }
     
 }

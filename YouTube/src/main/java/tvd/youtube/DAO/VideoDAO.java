@@ -6,6 +6,7 @@
 package tvd.youtube.DAO;
 
 import java.util.List;
+import tvd.youtube.models.User;
 import tvd.youtube.models.Video;
 
 /**
@@ -23,7 +24,7 @@ public interface VideoDAO {
     
     List<Video> getAllVideos();
     
-    List<Video> getVideosByUser(int userid);
+    List<Video> getVideosByUser(User user);
 
     public void saveVideos(List<Video> videos);
 }

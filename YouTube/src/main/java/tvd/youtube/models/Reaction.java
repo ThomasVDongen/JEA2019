@@ -9,12 +9,15 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.Convert;
+import javax.persistence.Converter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import util.LocalDateTimeConverter;
 
 /**
  *
@@ -22,30 +25,32 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class Reaction {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String text;
-    @OneToOne
+    @ManyToOne
     private User sender;
-    @OneToOne
+    @ManyToOne
     private Video video;
+    @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime time;
     ///Allows reactions to have reactions
     @OneToMany
-    @JsonbTransient 
+    @JsonbTransient
     private List<Reaction> reactions;
 
     public Reaction() {
+        this.reactions = new ArrayList<>();
     }
-    
-    
 
     public Reaction(String text, User sender, Video video) {
+        this();
         this.text = text;
         this.sender = sender;
         this.video = video;
         this.time = LocalDateTime.now();
-        this.reactions = new ArrayList<>();
     }
 
     public String getText() {
@@ -87,8 +92,8 @@ public class Reaction {
     public void setTime(LocalDateTime time) {
         this.time = time;
     }
-    
-    public void update(Reaction r){
+
+    public void update(Reaction r) {
         this.text = r.getText();
         this.time = LocalDateTime.now();
     }
@@ -100,8 +105,8 @@ public class Reaction {
     public void setReactions(List<Reaction> reactions) {
         this.reactions = reactions;
     }
-    
-    public void react(Reaction r){
+
+    public void react(Reaction r) {
         this.getReactions().add(r);
     }
 

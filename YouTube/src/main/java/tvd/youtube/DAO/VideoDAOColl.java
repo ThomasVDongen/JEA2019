@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
+import tvd.youtube.models.User;
 import tvd.youtube.models.Video;
 
 /**
@@ -57,10 +58,10 @@ public class VideoDAOColl implements VideoDAO{
     }
 
     @Override
-    public List<Video> getVideosByUser(int userid) {
+    public List<Video> getVideosByUser(User userid) {
         List<Video> values = new ArrayList<>();
         for (Video v : this.videomap.values()){
-            if (v.getUploader().getId() == userid){
+            if (v.getUploader().getId() == userid.getId()){
                 values.add(v);
             }
         }

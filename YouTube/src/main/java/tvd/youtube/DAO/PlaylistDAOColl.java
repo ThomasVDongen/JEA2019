@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import tvd.youtube.models.Playlist;
+import tvd.youtube.models.User;
 
 /**
  *
@@ -57,10 +58,10 @@ public class PlaylistDAOColl implements PlaylistDAO{
     }
 
     @Override
-    public List<Playlist> getAllPlaylistsByUser(int userid) {
+    public List<Playlist> getAllPlaylistsByUser(User u) {
         List<Playlist> lists = new ArrayList<>();
         for (Playlist p : this.playlistmap.values()){
-            if (p.getCreator().getId() == userid){
+            if (p.getCreator().getId() == u.getId()){
                 lists.add(p);
             }
         }
