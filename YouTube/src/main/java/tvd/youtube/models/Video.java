@@ -120,5 +120,14 @@ public class Video {
     
     public void addReaction(Reaction r){
         this.getReactions().add(r);
-    }       
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+    
 }

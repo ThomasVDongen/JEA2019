@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import util.VideoStatus;
 import javax.ws.rs.core.Link;
+import tvd.youtube.models.Video;
 
 /**
  *
@@ -37,6 +38,10 @@ public class VideoDTO {
         this.uploaderId = uploaderId;
         this.status = status;
         this.links = new ArrayList<>();
+    }
+
+    public VideoDTO(Video v) {
+        this(v.getId(), v.getName(),v.getDescription() , v.getViews(), v.getUploadTime(), v.getUploader().getName(), v.getUploader().getId(), v.getStatus());
     }
 
     public int getId() {
