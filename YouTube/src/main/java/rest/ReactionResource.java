@@ -5,7 +5,9 @@
  */
 package rest;
 
+import DTO.ReactionDTO;
 import io.swagger.annotations.Api;
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -48,7 +50,12 @@ public class ReactionResource {
     public Response getAll() {
         try {
             List<Reaction> reactions = rs.getAllReactions();
-            return Response.status(Response.Status.OK).entity(reactions).build();
+            List<ReactionDTO> dtos = new ArrayList<>();
+            for (Reaction r : reactions){
+                ReactionDTO dto = new ReactionDTO(r);
+                dtos.add(dto);
+            }
+            return Response.status(Response.Status.OK).entity(dtos).build();
         } catch (NotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         } catch (Exception e) {
@@ -61,7 +68,7 @@ public class ReactionResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getReaction(@PathParam("id") int id) {
         try {
-            Reaction r = rs.find(id);
+            ReactionDTO r = new ReactionDTO(rs.find(id));
             return Response.status(Response.Status.OK).entity(r).build();
         } catch (NotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();

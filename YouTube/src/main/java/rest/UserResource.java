@@ -5,7 +5,9 @@
  */
 package rest;
 
+import DTO.UserDTO;
 import io.swagger.annotations.Api;
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -40,7 +42,12 @@ public class UserResource {
     public Response getAll() {
         try {
             List<User> users = us.getAllUsers();
-            return Response.status(Response.Status.OK).entity(users).build();
+            List<UserDTO> dtos = new ArrayList<>();
+            for (User u : users){
+                UserDTO dto = new UserDTO(u);
+                dtos.add(dto);
+            }
+            return Response.status(Response.Status.OK).entity(dtos).build();
         } catch (NotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         } catch (Exception e) {
@@ -54,7 +61,7 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(@PathParam("id") int id) {
         try {
-            User u = us.find(id);
+            UserDTO u = new UserDTO(us.find(id));
             return Response.status(Response.Status.OK).entity(u).build();
         } catch (NotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
