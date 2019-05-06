@@ -31,10 +31,12 @@ public class Video {
     private List<Reaction> reactions;
     @ManyToOne
     private User uploader;
-    private VideoStatus status;    
+    private VideoStatus status;
+    private int views;    
 
     public Video() {
         this.reactions = new ArrayList<>();
+        this.views = 0;
     }
     
     
