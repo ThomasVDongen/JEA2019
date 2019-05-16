@@ -12,8 +12,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import org.junit.Before;
 import org.junit.Test;
 import tvd.youtube.DAO.PlaylistDAOJPA;
 import tvd.youtube.DAO.UserDAOJPA;
@@ -57,9 +59,8 @@ public class PlaylistTest {
         userService.setDAO(userDao);
         playlistService.setDAO(playlistDao);
     }
-    
-    
-     @Test
+
+    @Test
     public void createPlaylist() {
         setupEntityManager();
         User user = new User("user1", "email", "password", LocalDate.of(1996, Month.APRIL, 27), "user");
@@ -73,15 +74,15 @@ public class PlaylistTest {
         //videoService.create(v);
         em.getTransaction().commit();
         User test = userService.getUserByName("user1");
-        List<Playlist> playlists = playlistService.getPlaylistsbyUser(user);
+        List<Playlist> playlists = playlistService.getPlaylistsbyUser(test);
         em.close();
         emf.close();
         assertNotNull(playlists);
 
     }
-    
+
     @Test
-    public void editPlaylist(){
+    public void editPlaylist() {
         setupEntityManager();
         User user = new User("user1", "email", "password", LocalDate.of(1996, Month.APRIL, 27), "user");
         Video v = new Video("video2", "Video for test purposes only", LocalDateTime.now(), user, VideoStatus.Public);
@@ -95,9 +96,10 @@ public class PlaylistTest {
         p.setName("test naam");
         playlistService.edit(p);
         em.getTransaction().commit();
-        
-         List<Playlist> playlists = playlistService.getPlaylistsbyUser(user);
+
+        List<Playlist> playlists = playlistService.getPlaylistsbyUser(user);
         assertEquals("test naam", playlists.get(0).getName());
-        
+
     }
+
 }

@@ -19,7 +19,7 @@ import tvd.youtube.models.User;
 @RequestScoped @JPA
 public class UserDAOJPA extends EntityDAO<User> implements UserDAO{
 
-    @PersistenceContext
+    @PersistenceContext(unitName= "YoutubePU")
     EntityManager em;
     
     public UserDAOJPA() {

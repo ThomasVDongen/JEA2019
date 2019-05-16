@@ -20,7 +20,7 @@ import tvd.youtube.models.Video;
 @RequestScoped @JPA
 public class VideoDAOJPA extends EntityDAO<Video> implements VideoDAO{
     
-    @PersistenceContext
+    @PersistenceContext(unitName ="YoutubePU")
     EntityManager em;
 
     public VideoDAOJPA() {

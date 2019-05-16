@@ -34,6 +34,12 @@ import util.VideoStatus;
 @Named("manage")
 public class ManageBean implements Serializable {
 
+        
+    @Inject
+    VideoService vs;
+    @Inject
+    UserService us;
+    
     private List<Video> allVideos;
     private User currentUser;
     private List<VideoStatus> allStatus;
@@ -62,11 +68,7 @@ public class ManageBean implements Serializable {
     public void setAllStatus(List<VideoStatus> allStatus) {
         this.allStatus = allStatus;
     }
-    
-    @Inject
-    VideoService vs;
-    @Inject
-    UserService us;
+
 
     @PostConstruct
     private void init() {

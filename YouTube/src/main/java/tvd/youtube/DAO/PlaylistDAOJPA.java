@@ -19,7 +19,7 @@ import tvd.youtube.models.User;
  */
 @RequestScoped @JPA
 public class PlaylistDAOJPA extends EntityDAO<Playlist> implements PlaylistDAO{
-    @PersistenceContext
+    @PersistenceContext(unitName ="YoutubePU")
     EntityManager em;
 
     public PlaylistDAOJPA() {

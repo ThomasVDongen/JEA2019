@@ -6,6 +6,7 @@
 package tvd.youtube.DAO;
 
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,7 +21,7 @@ import tvd.youtube.models.Video;
 @RequestScoped @JPA
 public class ReactionDAOJPA extends EntityDAO<Reaction> implements ReactionDAO {
 
-    @PersistenceContext
+    @PersistenceContext(unitName ="YoutubePU")
     EntityManager em;
 
     public ReactionDAOJPA() {

@@ -5,15 +5,20 @@
  */
 package JPATest;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import org.junit.Before;
 import org.junit.Test;
 import tvd.youtube.DAO.ReactionDAOJPA;
 import tvd.youtube.DAO.UserDAOJPA;
@@ -22,6 +27,7 @@ import tvd.youtube.models.User;
 import tvd.youtube.models.Video;
 import tvd.youtube.services.ReactionService;
 import tvd.youtube.services.UserService;
+import util.DatabaseCleaner;
 import util.VideoStatus;
 
 /**
@@ -36,25 +42,12 @@ public class ReactionTest {
     ReactionService reactionservice;
     EntityManager em;
     EntityManagerFactory emf;
-
-    private void setupEntityManager() {
-        emf = Persistence.createEntityManagerFactory("YoutubeTestPU");
-        em = emf.createEntityManager();
-        userdao = new UserDAOJPA();
-        reactiondao = new ReactionDAOJPA();
-        reactionservice = new ReactionService();
-        userservice = new UserService();
-        reactiondao.setEntityManager(em);
-        userdao.setEntityManager(em);
-        userservice.setDAO(userdao);
-        reactionservice.setDAO(reactiondao);
-    }
+    User user;
     
     
     @Test
     public void react() {
-        setupEntityManager();
-        User user = new User("user1", "email", "password", LocalDate.of(1996, Month.APRIL, 27), "user");
+        user = new User("user1", "email", "password", LocalDate.of(1996, Month.APRIL, 27), "user");
         Video v = new Video("Video 1", "Video for test purposes only", LocalDateTime.now(), user, VideoStatus.Public);
         user.postVideo(v);
         Reaction r = new Reaction("what a great test", user, v);
@@ -66,13 +59,11 @@ public class ReactionTest {
         em.close();
         emf.close();
         assertNotNull(reactions);
-
     }
     
     @Test
     public void editreaction(){
-        setupEntityManager();
-        User user = new User("user1", "email", "password", LocalDate.of(1996, Month.APRIL, 27), "user");
+        user = new User("user1", "email", "password", LocalDate.of(1996, Month.APRIL, 27), "user");
         Video v = new Video("video2", "Video for test purposes only", LocalDateTime.now(), user, VideoStatus.Public);
         user.postVideo(v);
         Reaction r = new Reaction("what a great test", user, v);
@@ -88,7 +79,25 @@ public class ReactionTest {
         
         List<Reaction> reactions = reactionservice.getAllReactionsFromVideo(v);
         assertEquals(teststring, reactions.get(0).getText());
-        
+    }
+
+    @Before
+    public void cleanDatabase() {
+        emf = Persistence.createEntityManagerFactory("YoutubeTestPU");
+        em = emf.createEntityManager();
+        userdao = new UserDAOJPA();
+        reactiondao = new ReactionDAOJPA();
+        reactionservice = new ReactionService();
+        userservice = new UserService();
+        reactiondao.setEntityManager(em);
+        userdao.setEntityManager(em);
+        userservice.setDAO(userdao);
+        reactionservice.setDAO(reactiondao);
+        try {
+            new DatabaseCleaner(emf.createEntityManager()).clean();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReactionTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     

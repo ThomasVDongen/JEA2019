@@ -3,6 +3,7 @@ package tvd.youtube.models;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class Video {
     private LocalDateTime uploadTime;
     @OneToMany(mappedBy = "video")
     private List<Reaction> reactions;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private User uploader;
     private VideoStatus status;
     private int views;    

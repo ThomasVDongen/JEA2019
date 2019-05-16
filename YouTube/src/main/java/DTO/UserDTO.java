@@ -45,7 +45,7 @@ public class UserDTO {
     }
 
     public UserDTO(User u) {
-        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.getBirthday(), u.getRole(), u.getVideos().size(), u.getSubscribers().size(), u.getSubscribed().size());
+        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.getBirthday(), u.getRole(), u.getRole(), u.getVideos().size(), u.getSubscribers().size(), u.getSubscribed().size());
         
     }
 
