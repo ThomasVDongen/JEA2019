@@ -103,4 +103,23 @@ public class VideoResource {
         }
 
     }
+    
+    @GET
+    @Path("/public")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllPublic() {
+        try {
+            List<Video> videos = vs.getAllPublic();
+            List<VideoDTO> dtos = new ArrayList<>();
+            for (Video v : videos){
+                VideoDTO dto = new VideoDTO(v);
+                dtos.add(dto);
+            }
+            return Response.status(Response.Status.OK).entity(dtos).build();
+        } catch (NotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Something went wrong").build();
+        }
+    }
 }

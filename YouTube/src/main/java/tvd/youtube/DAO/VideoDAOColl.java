@@ -13,6 +13,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import tvd.youtube.models.User;
 import tvd.youtube.models.Video;
+import util.VideoStatus;
 
 /**
  *
@@ -75,5 +76,18 @@ public class VideoDAOColl implements VideoDAO{
             this.videomap.put(v.getId(), v);
         }
     }
+
+    @Override
+    public List<Video> getAllPublic() {
+        List<Video> values = new ArrayList<>();
+        for (Video v : this.videomap.values()){
+            if (v.getStatus() == VideoStatus.Public){
+                values.add(v);
+            }
+        }
+        return values;
+    }
+    
+    
     
 }

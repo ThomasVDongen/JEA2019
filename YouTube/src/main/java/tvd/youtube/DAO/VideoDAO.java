@@ -27,4 +27,6 @@ public interface VideoDAO {
     List<Video> getVideosByUser(User user);
 
     public void saveVideos(List<Video> videos);
+
+    public List<Video> getAllPublic();
 }

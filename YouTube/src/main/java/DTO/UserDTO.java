@@ -21,7 +21,6 @@ public class UserDTO {
     private int id;
     private String name;
     private String email;
-    private String password;
     private LocalDate birthday;
     private String role;
     private String url;
@@ -30,11 +29,10 @@ public class UserDTO {
     private int subscriberCount;
     private int subscribedCount;
 
-    public UserDTO(int id, String name, String email, String password, LocalDate birthday, String role, String url, int videoCount, int subscriberCount, int subscribedCount) {
+    public UserDTO(int id, String name, String email, LocalDate birthday, String role, String url, int videoCount, int subscriberCount, int subscribedCount) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.password = password;
         this.birthday = birthday;
         this.role = role;
         this.url = url;
@@ -45,7 +43,7 @@ public class UserDTO {
     }
 
     public UserDTO(User u) {
-        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.getBirthday(), u.getRole(), u.getRole(), u.getVideos().size(), u.getSubscribers().size(), u.getSubscribed().size());
+        this(u.getId(), u.getName(), u.getEmail(), u.getBirthday(), u.getRole(), u.getRole(), u.getVideos().size(), u.getSubscribers().size(), u.getSubscribed().size());
         
     }
 
@@ -71,14 +69,6 @@ public class UserDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public LocalDate getBirthday() {

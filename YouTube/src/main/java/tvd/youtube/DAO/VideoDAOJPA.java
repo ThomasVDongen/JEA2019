@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import tvd.youtube.models.User;
 import tvd.youtube.models.Video;
+import util.VideoStatus;
 
 /**
  *
@@ -59,6 +60,13 @@ public class VideoDAOJPA extends EntityDAO<Video> implements VideoDAO{
         for (Video v : videos){
             em.merge(v);
         }
+    }
+
+    @Override
+    public List<Video> getAllPublic() {
+        Query q = em.createQuery("Select V from Video v where v.status= :public");
+        q.setParameter("public", VideoStatus.Public);
+        return q.getResultList();
     }
     
 }

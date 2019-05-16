@@ -58,4 +58,8 @@ public class VideoService{
         this.dao = dao;
     }
     
+    public List<Video> getAllPublic(){
+        return dao.getAllPublic();
+    }
+    
 }
