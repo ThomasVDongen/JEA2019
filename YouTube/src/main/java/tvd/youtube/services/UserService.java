@@ -5,12 +5,15 @@
  */
 package tvd.youtube.services;
 
+import Filter.JWTTokenNeeded;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import jwt.UserType;
 import tvd.youtube.DAO.JPA;
 import tvd.youtube.DAO.UserDAO;
 import tvd.youtube.models.User;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -18,39 +21,54 @@ import tvd.youtube.models.User;
  */
 @Stateless
 public class UserService {
-    
-    @Inject @JPA
+
+    @Inject
+    @JPA
     UserDAO userdao;
-    
-    public void create(User u){
+
+    public void create(User u) {
         userdao.create(u);
     }
-    
-    public void edit(User u){
-        userdao.edit(u);               
+
+    @JWTTokenNeeded(UserType.USER)
+    public void edit(User u) {
+        userdao.edit(u);
     }
-    
-    public void remove(User u){
+
+    @JWTTokenNeeded(UserType.USER)
+    public void remove(User u) {
         userdao.remove(u);
     }
-    
-    public User find(int id){
+
+    @JWTTokenNeeded(UserType.USER)
+    public User find(int id) {
         return userdao.find(id);
     }
-    
-    public List<User> getAllUsers(){
+
+    @JWTTokenNeeded(UserType.USER)
+    public List<User> getAllUsers() {
         return userdao.getAllUsers();
     }
-    
-    public User getUserByName(String name){
+
+    @JWTTokenNeeded(UserType.USER)
+    public User getUserByName(String name) {
         return userdao.getUserByName(name);
     }
 
     public void setDAO(UserDAO dao) {
-        if (dao == null){
+        if (dao == null) {
             return;
         }
         this.userdao = dao;
     }
-    
+
+    public User authenticate(String username, String password) {
+        if (username != null && password != null) {
+            String hashedpassword = DigestUtils.sha256Hex(password);
+            System.out.println(hashedpassword);
+            return this.userdao.authenticate(username, hashedpassword);
+        }
+        return null;
+    }
+
 }

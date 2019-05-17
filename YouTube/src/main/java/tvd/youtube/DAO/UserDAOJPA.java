@@ -52,5 +52,13 @@ public class UserDAOJPA extends EntityDAO<User> implements UserDAO{
     public void setEntityManager(EntityManager em) {
         this.em = em;
     }
+
+    @Override
+    public User authenticate(String username, String password) {
+        Query query = em.createQuery("Select u from User u where u.name = :name and u.password = :password");
+        query.setParameter("name", username);
+        query.setParameter("password", password);       
+        return (User) query.getSingleResult();
+    }
     
 }

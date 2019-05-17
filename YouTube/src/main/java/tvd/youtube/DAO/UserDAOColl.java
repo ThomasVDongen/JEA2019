@@ -63,5 +63,15 @@ public class UserDAOColl implements UserDAO{
         }
         return null;
     }
+
+    @Override
+    public User authenticate(String username, String password) {
+        for (User u : this.usermap.values()){
+            if ((u.getName() == null ? username == null : u.getName().equals(username)) && (u.getPassword() == null ? password == null : u.getPassword().equals(password))){
+                return u;
+            }
+        }
+        return null;
+    }
     
 }

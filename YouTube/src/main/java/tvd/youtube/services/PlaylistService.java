@@ -5,9 +5,11 @@
  */
 package tvd.youtube.services;
 
+import Filter.JWTTokenNeeded;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import jwt.UserType;
 import tvd.youtube.DAO.JPA;
 import tvd.youtube.DAO.PlaylistDAO;
 import tvd.youtube.models.Playlist;
@@ -19,38 +21,46 @@ import tvd.youtube.models.User;
  */
 @Stateless
 public class PlaylistService {
-    
-    @Inject @JPA
+
+    @Inject
+    @JPA
     PlaylistDAO playlistDAO;
 
     public PlaylistService() {
     }
-    
-    public void create(Playlist play){
+
+    @JWTTokenNeeded(UserType.USER)
+    public void create(Playlist play) {
         playlistDAO.create(play);
     }
-    public void edit(Playlist play){
+
+    @JWTTokenNeeded(UserType.USER)
+    public void edit(Playlist play) {
         playlistDAO.edit(play);
     }
-    
-    public void remove(Playlist play){
+
+    @JWTTokenNeeded(UserType.USER)
+    public void remove(Playlist play) {
         playlistDAO.remove(play);
     }
-    
-    public Playlist find(int id){
+
+    @JWTTokenNeeded(UserType.USER)
+    public Playlist find(int id) {
         return playlistDAO.find(id);
     }
-    
-    public List<Playlist> getAllPlaylists(){
+
+    @JWTTokenNeeded(UserType.USER)
+    public List<Playlist> getAllPlaylists() {
         return playlistDAO.getAllPlaylists();
     }
-    
-    public List<Playlist> getPlaylistsbyUser(User u){
+
+    @JWTTokenNeeded(UserType.USER)
+    public List<Playlist> getPlaylistsbyUser(User u) {
         return playlistDAO.getAllPlaylistsByUser(u);
     }
 
     public void setDAO(PlaylistDAO playlistDao) {
         this.playlistDAO = playlistDao;
     }
-    
+
 }

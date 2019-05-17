@@ -25,4 +25,6 @@ public interface UserDAO {
     List<User> getAllUsers();
     
     User getUserByName(String name);
+
+    User authenticate(String username, String password);
 }

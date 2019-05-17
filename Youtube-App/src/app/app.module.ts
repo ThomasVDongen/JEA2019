@@ -8,6 +8,7 @@ import { LoginpageComponent } from './components/loginpage/loginpage.component';
 import { UploadpageComponent } from './components/uploadpage/uploadpage.component';
 import { ProfilepageComponent } from './components/profilepage/profilepage.component';
 import { PlaylistpageComponent } from './components/playlistpage/playlistpage.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { PlaylistpageComponent } from './components/playlistpage/playlistpage.co
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule, FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
