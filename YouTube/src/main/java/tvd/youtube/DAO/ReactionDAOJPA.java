@@ -18,16 +18,17 @@ import tvd.youtube.models.Video;
  *
  * @author Laptop_Thomas
  */
-@RequestScoped @JPA
+@RequestScoped
+@JPA
 public class ReactionDAOJPA extends EntityDAO<Reaction> implements ReactionDAO {
 
-    @PersistenceContext(unitName ="YoutubePU")
+    @PersistenceContext(unitName = "YoutubePU")
     EntityManager em;
 
     public ReactionDAOJPA() {
         super(Reaction.class);
     }
-    
+
     @Override
     public List<Reaction> getAllReactions() {
         Query query = em.createQuery("SELECT R FROM Reaction R");

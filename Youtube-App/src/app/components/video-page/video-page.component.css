@@ -1,0 +1,17 @@
+.reactions{
+    border: 2px solid gray;
+    border-radius: 5px;
+    width: 20%;
+    text-align: left;
+    margin: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.noreactions{
+    font-style: italic;
+}
+
+.videoInfo{
+    margin-top: 5%;
+}

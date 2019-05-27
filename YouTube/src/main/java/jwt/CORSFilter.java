@@ -1,33 +1,57 @@
 
-package Filter;
+package jwt;
 
 
 import java.io.IOException;
 import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
-import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public class CORSFilter
-        implements ContainerResponseFilter {
+public class CORSFilter implements ContainerRequestFilter, ContainerResponseFilter {
+
+    /**
+     * Method for ContainerRequestFilter.
+     */
+    @Override
+    public void filter(ContainerRequestContext request) throws IOException {
+
+        // If it's a preflight request, we abort the request with
+        // a 200 status, and the CORS headers are added in the
+        // response filter method below.
+        if (isPreflightRequest(request)) {
+            request.abortWith(Response.ok().build());
+            return;
+        }
+    }
+
+    /**
+     * A preflight request is an OPTIONS request with an Origin header.
+     */
+    private static boolean isPreflightRequest(ContainerRequestContext request) {
+        return request.getHeaderString("Origin") != null
+                && request.getMethod().equalsIgnoreCase("OPTIONS");
+    }
 
     @Override
-    public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext)
-            throws IOException {
+    public void filter(final ContainerRequestContext requestContext,
+            final ContainerResponseContext cres) throws IOException {
 
-        MultivaluedMap<String, Object> headers = responseContext.getHeaders();
-        headers.add("access-control-expose-headers", ",Authorization" + ",Content-Length");
-        headers.add("Access-Control-Allow-Origin", "*");
-        headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-        headers.add("Access-Control-Allow-Headers",
-                    "Origin"
-                    + ",X-Requested-With"
-                    + ",x-access-token"
-                    + ",Content-Type"
-                    + ",Authorization"
-                    + ",Accept");
+        cres.getHeaders().add(
+                "Access-Control-Allow-Origin", "*");
+        cres.getHeaders().add(
+                "Access-Control-Allow-Credentials", "true");
+        cres.getHeaders().add(
+                "Access-Control-Allow-Headers",
+                "origin, content-type, accept, authorization");
+        cres.getHeaders().add(
+                "Access-Control-Allow-Methods",
+                "GET, POST, PUT, DELETE, OPTIONS, HEAD");
+        cres.getHeaders().add("Access-Control-Expose-Headers", "Authorization");
     }
+
 }
 

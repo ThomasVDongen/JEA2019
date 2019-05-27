@@ -5,20 +5,26 @@
  */
 package jwt;
 
-import java.security.Key;
-import javax.crypto.spec.SecretKeySpec;
-import javax.ejb.Stateless;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
-/**
- *
- * @author Laptop_Thomas
- */
-@Stateless
+
 public class SimpleKeyGenerator {
 
-    public Key generateKey() {
-        String keyString = "YoutubeTVD";
-        Key key = new SecretKeySpec(keyString.getBytes(), 0, keyString.getBytes().length, "DES");
-        return key;
+    private static final String SECRET_KEY = "secret";
+    private static final String SHA_256 = "SHA-256";
+
+    public String generateKey() throws NoSuchAlgorithmException {
+        return getHashText(SECRET_KEY);
+    }
+
+    protected String getHashText(final String text) throws NoSuchAlgorithmException {
+        MessageDigest messageDigest = MessageDigest.getInstance(SHA_256);
+        byte[] hash = messageDigest.digest(text.getBytes(StandardCharsets.UTF_8));
+        String encoded = Base64.getEncoder().encodeToString(hash);
+
+        return encoded;
     }
 }

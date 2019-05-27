@@ -16,17 +16,13 @@ import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import tvd.youtube.DAO.UserDAOJPA;
 import tvd.youtube.models.User;
 import tvd.youtube.services.UserService;
+import util.Role;
 
 /**
  *
@@ -73,7 +69,7 @@ public class Usertest {
     public void createUser() {
         setupEntityManager();
         String username = "name";
-        User user = new User(username, "email", "password", LocalDate.of(1996, Month.APRIL, 27), "user");
+        User user = new User(username, "email", "password", LocalDate.of(1996, Month.APRIL, 27), Role.user);
         em.getTransaction().begin();
         service.create(user);
         em.getTransaction().commit();
@@ -88,8 +84,8 @@ public class Usertest {
     @Test
     public void followUser(){
         setupEntityManager();
-        User user = new User("user1", "email", "password", LocalDate.of(1996, Month.APRIL, 27), "user");
-        User user2 = new User("user2", "email2", "password", LocalDate.of(1998, Month.NOVEMBER, 25), "user");
+        User user = new User("user1", "email", "password", LocalDate.of(1996, Month.APRIL, 27), Role.user);
+        User user2 = new User("user2", "email2", "password", LocalDate.of(1998, Month.NOVEMBER, 25), Role.user);
         em.getTransaction().begin();
         service.create(user);
         service.create(user2);

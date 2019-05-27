@@ -26,7 +26,13 @@ public interface VideoDAO {
     
     List<Video> getVideosByUser(User user);
 
-    public void saveVideos(List<Video> videos);
+    void saveVideos(List<Video> videos);
 
-    public List<Video> getAllPublic();
+    List<Video> getAllPublic();
+
+    List<Video> getTrending();
+
+    List<Video> getSubscriptions(User u);
+
+    List<Video> search(String title);
 }

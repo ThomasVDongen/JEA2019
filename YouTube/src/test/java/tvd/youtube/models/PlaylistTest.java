@@ -15,6 +15,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import util.Role;
 import util.VideoStatus;
 
 /**
@@ -44,7 +45,7 @@ public class PlaylistTest {
     
     @Test
     public void addVideo(){
-        User u = new User("user1", "test", "test", LocalDate.now(), "user");
+        User u = new User("user1", "test", "test", LocalDate.now(), Role.user);
         Video v = new Video("playlist unittest", "video about unit testing", LocalDateTime.now(), u, VideoStatus.Public);
         Playlist p = new Playlist("Testlist",u);
         List<Video> fakeplaylist = new ArrayList<>();

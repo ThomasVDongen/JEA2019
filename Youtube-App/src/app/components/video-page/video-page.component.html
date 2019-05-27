@@ -1,0 +1,30 @@
+<form style="margin: 0;" [formGroup]="form" (ngSubmit)="createReaction()" >
+<div class="videoInfo">
+  <h1>Title: {{video.name}}</h1>
+  <h2>Views: {{video.views}}</h2>
+</div>
+<div class="creatorInfo">
+  <h1 (click)="selectUser(creator.id)">creator: {{creator.name}}</h1>
+  <p>Uploaded at: {{video.uploadTime}}</p>
+  <h2>Description:</h2>
+  <p>{{video.description}}</p>
+</div>
+
+<span class="border">
+  <div *ngIf="reactions.length === 0 && currentUser !== null" class="noreactions">
+    <p>There are no reactions yet be the first to place one.</p>
+  </div>
+  <div *ngIf="currentUser !== null" class="createReaction">
+    <p>Place your reaction here:</p>
+    <input style="width: 200px; margin: auto;" class="form-control" type="text" formControlName="reactionField"/>
+    <br>
+    <button class="btn btn-default" type="submit">Place Reaction</button>
+  </div>
+  <div class="reactions" *ngFor="let reaction of reactions">
+    <h3 (click)="selectUser(reaction.senderId)">Sender: {{reaction.senderName}}</h3>
+    <p>Text: {{reaction.text}}</p>
+    <p>Sent at: {{reaction.time}}</p>
+  </div>
+</span>
+
+</form>

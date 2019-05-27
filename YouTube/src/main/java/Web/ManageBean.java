@@ -19,6 +19,7 @@ import tvd.youtube.models.User;
 import tvd.youtube.models.Video;
 import tvd.youtube.services.UserService;
 import tvd.youtube.services.VideoService;
+import util.Role;
 import util.VideoStatus;
 
 /*
@@ -34,12 +35,11 @@ import util.VideoStatus;
 @Named("manage")
 public class ManageBean implements Serializable {
 
-        
     @Inject
     VideoService vs;
     @Inject
     UserService us;
-    
+
     private List<Video> allVideos;
     private User currentUser;
     private List<VideoStatus> allStatus;
@@ -69,7 +69,6 @@ public class ManageBean implements Serializable {
         this.allStatus = allStatus;
     }
 
-
     @PostConstruct
     private void init() {
         this.generateVideos();
@@ -81,26 +80,30 @@ public class ManageBean implements Serializable {
         vs.saveVideos(allVideos);
         this.reload();
     }
-    
-    public void deleteVideo(int videoid){
-        for (Video v : allVideos){
-            if (v.getId() == videoid){
+
+    public void deleteVideo(int videoid) {
+        for (Video v : allVideos) {
+            if (v.getId() == videoid) {
                 vs.remove(v);
             }
         }
         this.allVideos = vs.getAllVideos();
         this.reload();
     }
-    
-    private void generateVideos(){
-        User u = new User("user1", "test", "test", LocalDate.now(), "user");
+
+    private void generateVideos() {
+        User u = new User("user1", "test", "test", LocalDate.now(), Role.user);
+        User u2 = new User("user2", "email", "test", LocalDate.now(), Role.user);
         Video v1 = new Video("How to ", "how to java ee", LocalDateTime.now(), u, VideoStatus.Public);
         Video v2 = new Video("test", "test", LocalDateTime.now(), u, VideoStatus.Public);
         u.getVideos().add(v1);
         u.getVideos().add(v2);
+        u2.subscribeTo(u);
+        us.create(u2);
         vs.saveVideos(u.getVideos());
+
     }
-    
+
     public void reload() {
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         try {

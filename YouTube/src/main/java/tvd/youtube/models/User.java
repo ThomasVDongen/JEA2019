@@ -1,22 +1,23 @@
 package tvd.youtube.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import util.LocalDateConverter;
+import util.Role;
 
 /**
  *
@@ -34,7 +35,8 @@ public class User {
     private String password;
     @Convert(converter = LocalDateConverter.class)
     private LocalDate birthday;
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     @Column(unique = true)
     private String url;
 
@@ -44,11 +46,11 @@ public class User {
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "CREATOR_ID")
     private List<Playlist> playlists;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JsonbTransient
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private List<User> subscribed;
-    @ManyToMany(mappedBy = "subscribed", fetch = FetchType.LAZY)
-    @JsonbTransient
+    @ManyToMany(mappedBy = "subscribed", cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private List<User> subscribers;
     @OneToMany(targetEntity = Reaction.class, mappedBy = "sender", cascade = CascadeType.PERSIST)
     private List<Reaction> reactions;
@@ -61,7 +63,7 @@ public class User {
         this.reactions = new ArrayList<>();
     }
 
-    public User(String name, String email, String password, LocalDate birthday, String role) {
+    public User(String name, String email, String password, LocalDate birthday, Role role) {
         this();
         this.name = name;
         this.email = email;
@@ -111,11 +113,11 @@ public class User {
         this.birthday = birthday;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -176,21 +178,26 @@ public class User {
         u.getSubscribers().add(this);
     }
     
-    public void postVideo(Video v){
+    public void unsubscribeFrom(User u){
+        this.subscribed.remove(u);
+        u.getSubscribers().remove(this);
+    }
+
+    public void postVideo(Video v) {
         this.videos.add(v);
     }
-    
-    public void react(Reaction r, Video v){
+
+    public void react(Reaction r, Video v) {
         this.reactions.add(r);
         v.addReaction(r);
     }
-    
-    public void react(Reaction r, Reaction r2){
+
+    public void react(Reaction r, Reaction r2) {
         this.reactions.add(r);
         r2.getReactions().add(r);
     }
-    
-    public void createPlaylist(Playlist p){
+
+    public void createPlaylist(Playlist p) {
         this.playlists.add(p);
     }
 

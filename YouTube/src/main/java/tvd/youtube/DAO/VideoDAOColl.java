@@ -19,10 +19,11 @@ import util.VideoStatus;
  *
  * @author Laptop_Thomas
  */
-@RequestScoped @Default
-public class VideoDAOColl implements VideoDAO{
-    
-   Map<Integer, Video> videomap;
+@RequestScoped
+@Default
+public class VideoDAOColl implements VideoDAO {
+
+    Map<Integer, Video> videomap;
 
     public VideoDAOColl() {
         this.videomap = new HashMap<>();
@@ -40,13 +41,13 @@ public class VideoDAOColl implements VideoDAO{
 
     @Override
     public void edit(Video v) {
-        this.videomap.replace(v.getId(), v);        
+        this.videomap.replace(v.getId(), v);
     }
 
     @Override
     public Video find(int id) {
-        for (Video video : this.videomap.values()){
-            if (id == video.getId()){
+        for (Video video : this.videomap.values()) {
+            if (id == video.getId()) {
                 return video;
             }
         }
@@ -61,8 +62,8 @@ public class VideoDAOColl implements VideoDAO{
     @Override
     public List<Video> getVideosByUser(User userid) {
         List<Video> values = new ArrayList<>();
-        for (Video v : this.videomap.values()){
-            if (v.getUploader().getId() == userid.getId()){
+        for (Video v : this.videomap.values()) {
+            if (v.getUploader().getId() == userid.getId()) {
                 values.add(v);
             }
         }
@@ -72,7 +73,7 @@ public class VideoDAOColl implements VideoDAO{
     @Override
     public void saveVideos(List<Video> videos) {
         this.videomap.clear();
-        for (Video v : videos){
+        for (Video v : videos) {
             this.videomap.put(v.getId(), v);
         }
     }
@@ -80,14 +81,37 @@ public class VideoDAOColl implements VideoDAO{
     @Override
     public List<Video> getAllPublic() {
         List<Video> values = new ArrayList<>();
-        for (Video v : this.videomap.values()){
-            if (v.getStatus() == VideoStatus.Public){
+        for (Video v : this.videomap.values()) {
+            if (v.getStatus() == VideoStatus.Public) {
                 values.add(v);
             }
         }
         return values;
     }
-    
-    
-    
+
+    @Override
+    public List<Video> getTrending() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Video> getSubscriptions(User u) {
+        List<Video> videos = new ArrayList<>();
+        for (User user : u.getSubscribed()) {
+            videos.addAll(user.getVideos());
+        }
+        return videos;
+    }
+
+    @Override
+    public List<Video> search(String title) {
+        List<Video> videos = new ArrayList<>();
+        for (Video v : this.videomap.values()){
+            if (v.getName().contains(title)){
+                videos.add(v);
+            }
+        }
+        return videos;
+    }
+
 }

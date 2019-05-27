@@ -5,11 +5,11 @@
  */
 package tvd.youtube.services;
 
-import Filter.JWTTokenNeeded;
+//import Filter.JWTTokenNeeded;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import jwt.UserType;
+//import jwt.UserType;
 import tvd.youtube.DAO.JPA;
 import tvd.youtube.DAO.UserDAO;
 import tvd.youtube.models.User;
@@ -30,27 +30,27 @@ public class UserService {
         userdao.create(u);
     }
 
-    @JWTTokenNeeded(UserType.USER)
+    //@JWTTokenNeeded(UserType.USER)
     public void edit(User u) {
         userdao.edit(u);
     }
 
-    @JWTTokenNeeded(UserType.USER)
+    //@JWTTokenNeeded(UserType.USER)
     public void remove(User u) {
         userdao.remove(u);
     }
 
-    @JWTTokenNeeded(UserType.USER)
+    //@JWTTokenNeeded(UserType.USER)
     public User find(int id) {
         return userdao.find(id);
     }
 
-    @JWTTokenNeeded(UserType.USER)
+    //@JWTTokenNeeded(UserType.USER)
     public List<User> getAllUsers() {
         return userdao.getAllUsers();
     }
 
-    @JWTTokenNeeded(UserType.USER)
+    //@JWTTokenNeeded(UserType.USER)
     public User getUserByName(String name) {
         return userdao.getUserByName(name);
     }
@@ -64,11 +64,23 @@ public class UserService {
 
     public User authenticate(String username, String password) {
         if (username != null && password != null) {
-            String hashedpassword = DigestUtils.sha256Hex(password);
-            System.out.println(hashedpassword);
-            return this.userdao.authenticate(username, hashedpassword);
+            return this.userdao.authenticate(username, password);
         }
         return null;
     }
+
+    ///userid: user to check if the check user follows him
+    public boolean getSubscribed(int userId, int check) {
+        return userdao.getSubscribed(userId, check);
+    }
+    
+    public void unsubscribe(int userId, int currentUser){
+        this.userdao.unsubscribe(userId, currentUser);
+    }
+
+    public long getSubCount(int user) {
+        return this.userdao.getSubCount(user);
+    }
+    
 
 }

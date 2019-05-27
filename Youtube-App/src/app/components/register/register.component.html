@@ -1,0 +1,13 @@
+<div class="register" style="width: 600px">
+    <h1>Register your account</h1>
+    <input [(ngModel)]="user.name" placeholder="Name" class="form-control">
+    <br>
+    <input [(ngModel)]="user.email" placeholder="Email" class="form-control">
+    <br>
+    <input [(ngModel)]="password1" placeholder="Password" class="form-control">
+    <br>
+    <input [(ngModel)]="password2" placeholder="Repeat password" class="form-control">
+    <br>
+    <ejs-datepicker [(ngModel)]="user.birthday" id='datepicker' placeholder='Select a date'></ejs-datepicker>
+    <input type="button" (click)="registerUser()" class="btn-default btn" value="Register" style="width: 600px"/>
+</div>

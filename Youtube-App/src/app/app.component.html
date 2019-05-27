@@ -1,3 +1,16 @@
-<h1>{{title}}</h1>
-<br>
-<app-loginpage></app-loginpage>
+<nav class="navbar navbar-fixed-top navbar-dark bg-inverse" style="margin: auto;">
+    <div class="container">
+        <ul class="nav navbar-nav" routerLinkActive="active">
+            <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
+            <li class="nav-item" *ngIf="currentUser === null"><a class="nav-link" routerLink="login">Login</a></li>
+            <li class="nav-item" *ngIf="currentUser !== null"><a class="nav-link" (click)="profilePage()">Profile</a></li>
+            <li><app-search></app-search></li>
+            <li class="nav-item" *ngIf="currentUser !== null"><a class="nav-link" routerLink="upload">Upload Video</a></li>
+            <li class="nav-item" *ngIf="currentUser !== null"><a class="nav-item nav-link" (click)="logout()">Logout</a></li>
+            <li class="nav-item" *ngIf="currentUser !== null"><a class="nav-item nav-link">{{currentUser.name}}</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container-content">
+    <router-outlet></router-outlet>
+</div>

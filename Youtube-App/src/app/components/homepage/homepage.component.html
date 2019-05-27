@@ -1,3 +1,45 @@
-<p>
-  homepage works!
-</p>
+<div *ngIf="currentUser === null" class="public">
+    <h1 class="videoheader">Videos</h1>
+    <ul fxLayout="row" fxLayoutAlign="space-evenly center">
+        <li *ngFor="let video of publicvideos" class="videos">
+            <div>
+                <h3 (click)="selectVideo(video.id)" class="videotitle">{{video.name}}</h3>
+                <div class="info">
+                    <p (click)="selectUser(video.uploaderId)">uploaded by: {{video.uploaderName}}</p>
+                    <p>views: {{video.views}}</p>
+                    <p>{{calculateTime(video.uploadTime)}}</p>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div *ngIf="currentUser !== null" class="subscriptions">
+    <h1 class="videoheader">Subscriptions</h1>
+    <p *ngIf="!subscriptions">No subscriptions yet.</p>
+    <ul fxLayout="row" fxLayoutAlign="space-evenly center">
+        <li *ngFor="let video of subscriptions" class="videos">
+            <h3 (click)="selectVideo(video.id)" class="videotitle">{{video.name}}</h3>
+            <div class="info">
+                <p (click)="selectUser(video.uploaderId)">uploaded by: {{video.uploaderName}}</p>
+                <p>views: {{video.views}}</p>
+                <p>{{calculateTime(video.uploadTime)}}</p>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="trending">
+    <h1 class="videoheader">Trending</h1>
+    <ul fxLayout="row" fxLayoutAlign="space-evenly center">
+        <li *ngFor="let video of trending" class="videos">
+            <h3 (click)="selectVideo(video.id)" class="videotitle">{{video.name}}</h3>
+            <div class="info">
+                <p (click)="selectUser(video.uploaderId)">uploaded by: {{video.uploaderName}}</p>
+                <p>views: {{video.views}}</p>
+                <p>{{calculateTime(video.uploadTime)}}</p>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+

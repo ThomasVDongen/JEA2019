@@ -1,0 +1,13 @@
+.filter-select{
+    background-color: lightgrey;
+}
+.filter-wrapper{
+    margin-top: 10px;
+}
+ul{
+    list-style: none;
+}
+
+.filter-select-list:hover{
+    border: 1px darkgray;
+}

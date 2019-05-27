@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import util.VideoStatus;
-import javax.ws.rs.core.Link;
 import tvd.youtube.models.Video;
 
 /**
@@ -42,6 +41,10 @@ public class VideoDTO {
 
     public VideoDTO(Video v) {
         this(v.getId(), v.getName(),v.getDescription() , v.getViews(), v.getUploadTime(), v.getUploader().getName(), v.getUploader().getId(), v.getStatus());
+    }
+    
+    public VideoDTO(){
+        this.links = new ArrayList<>();
     }
 
     public int getId() {
@@ -115,5 +118,15 @@ public class VideoDTO {
     public void setLinks(List<Link> links) {
         this.links = links;
     }
+    
+    public void addLink(String url, String rel){
+        links.add(new Link(url,rel));
+    }
+
+    @Override
+    public String toString() {
+        return "VideoDTO{" + "id=" + id + ", name=" + name + ", description=" + description + ", views=" + views + ", uploadTime=" + uploadTime + ", uploaderName=" + uploaderName + ", uploaderId=" + uploaderId + ", status=" + status + ", links=" + links + '}';
+    }
+    
     
 }

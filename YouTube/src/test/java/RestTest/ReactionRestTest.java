@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jwt;
+package RestTest;
 
 /**
  *
  * @author Laptop_Thomas
  */
-public final class UserType {
-    public static final String USER = "User";
-    public static final String ADMIN = "Admin";
+public class ReactionRestTest {
     
 }

@@ -27,6 +27,7 @@ import tvd.youtube.models.Video;
 import tvd.youtube.services.UserService;
 import tvd.youtube.services.VideoService;
 import util.DatabaseCleaner;
+import util.Role;
 import util.VideoStatus;
 
 /**
@@ -51,7 +52,7 @@ public class VideoTest {
 
     @Test
     public void createVideo() {
-        user = new User("user1", "email", "password", LocalDate.of(1996, Month.APRIL, 27), "user");
+        user = new User("user1", "email", "password", LocalDate.of(1996, Month.APRIL, 27), Role.user);
         Video v = new Video("Video 1", "Video for test purposes only", LocalDateTime.now(), user, VideoStatus.Public);
         user.postVideo(v);
         em.getTransaction().begin();
@@ -68,7 +69,7 @@ public class VideoTest {
 
     @Test
     public void blockVideo() {
-        user = new User("user1", "email", "password", LocalDate.of(1996, Month.APRIL, 27), "user");
+        user = new User("user1", "email", "password", LocalDate.of(1996, Month.APRIL, 27), Role.user);
         Video v = new Video("video2", "Video for test purposes only", LocalDateTime.now(), user, VideoStatus.Public);
         user.postVideo(v);
         em.getTransaction().begin();

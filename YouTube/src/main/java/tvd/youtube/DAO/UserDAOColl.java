@@ -73,5 +73,31 @@ public class UserDAOColl implements UserDAO{
         }
         return null;
     }
+
+    @Override
+    public boolean getSubscribed(int userId, int check) {
+        for (User user: this.usermap.values()){
+            if (user.getId() == userId){
+                for (User u : user.getSubscribers()){
+                    if(u.getId() == check){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    @Override
+    public void unsubscribe(int userId, int currentUser){
+        User u1 = this.find(userId);
+        User u2 = this.find(currentUser);
+        u2.unsubscribeFrom(u1);
+    }
+
+    @Override
+    public long getSubCount(int user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

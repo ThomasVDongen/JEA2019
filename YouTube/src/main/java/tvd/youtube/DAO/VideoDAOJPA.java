@@ -5,6 +5,7 @@
  */
 package tvd.youtube.DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
@@ -18,10 +19,11 @@ import util.VideoStatus;
  *
  * @author Laptop_Thomas
  */
-@RequestScoped @JPA
-public class VideoDAOJPA extends EntityDAO<Video> implements VideoDAO{
-    
-    @PersistenceContext(unitName ="YoutubePU")
+@RequestScoped
+@JPA
+public class VideoDAOJPA extends EntityDAO<Video> implements VideoDAO {
+
+    @PersistenceContext(unitName = "YoutubePU")
     EntityManager em;
 
     public VideoDAOJPA() {
@@ -32,8 +34,8 @@ public class VideoDAOJPA extends EntityDAO<Video> implements VideoDAO{
     protected EntityManager getEntityManager() {
         return this.em;
     }
-    
-    public void setEntityManager(EntityManager em){
+
+    public void setEntityManager(EntityManager em) {
         this.em = em;
     }
 
@@ -57,7 +59,7 @@ public class VideoDAOJPA extends EntityDAO<Video> implements VideoDAO{
 
     @Override
     public void saveVideos(List<Video> videos) {
-        for (Video v : videos){
+        for (Video v : videos) {
             em.merge(v);
         }
     }
@@ -68,5 +70,29 @@ public class VideoDAOJPA extends EntityDAO<Video> implements VideoDAO{
         q.setParameter("public", VideoStatus.Public);
         return q.getResultList();
     }
-    
+
+    @Override
+    public List<Video> getTrending() {
+        Query q = em.createQuery("Select V from Video v ORDER BY v.views DESC");
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Video> getSubscriptions(User u) {
+        List<Video> videos = new ArrayList<>();
+        Query q = em.createNativeQuery("Select u.* from User u join user_user uu on u.id = uu.subscribed_ID where uu.subscribers_ID = ?userId", User.class);
+        q.setParameter("userId", u.getId());
+        List<User> users = (List<User>)q.getResultList();
+        for (User user : users){
+            videos.addAll(this.getVideosByUser(user));
+        }
+        return videos;
+    }
+
+    @Override
+    public List<Video> search(String title) {
+       Query q = em.createQuery("Select v from Video v where lower(v.name) like :title");
+       q.setParameter("title", "%"+ title + "%");
+       return q.getResultList();
+    }
 }

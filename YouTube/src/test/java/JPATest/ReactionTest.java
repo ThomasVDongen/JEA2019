@@ -22,12 +22,15 @@ import org.junit.Before;
 import org.junit.Test;
 import tvd.youtube.DAO.ReactionDAOJPA;
 import tvd.youtube.DAO.UserDAOJPA;
+import tvd.youtube.DAO.VideoDAOJPA;
 import tvd.youtube.models.Reaction;
 import tvd.youtube.models.User;
 import tvd.youtube.models.Video;
 import tvd.youtube.services.ReactionService;
 import tvd.youtube.services.UserService;
+import tvd.youtube.services.VideoService;
 import util.DatabaseCleaner;
+import util.Role;
 import util.VideoStatus;
 
 /**
@@ -39,6 +42,8 @@ public class ReactionTest {
     UserDAOJPA userdao;
     ReactionDAOJPA reactiondao;
     UserService userservice;
+    VideoService videoService;
+    VideoDAOJPA videoDAO;
     ReactionService reactionservice;
     EntityManager em;
     EntityManagerFactory emf;
@@ -47,7 +52,7 @@ public class ReactionTest {
     
     @Test
     public void react() {
-        user = new User("user1", "email", "password", LocalDate.of(1996, Month.APRIL, 27), "user");
+        user = new User("user1", "email", "password", LocalDate.of(1996, Month.APRIL, 27),Role.user);
         Video v = new Video("Video 1", "Video for test purposes only", LocalDateTime.now(), user, VideoStatus.Public);
         user.postVideo(v);
         Reaction r = new Reaction("what a great test", user, v);
@@ -55,7 +60,7 @@ public class ReactionTest {
         em.getTransaction().begin();
         userservice.create(user);
         em.getTransaction().commit();
-        List<Reaction> reactions = reactionservice.getAllReactionsFromVideo(v);
+        List<Reaction> reactions = reactionservice.getAllReactionsFromVideo(v.getId());
         em.close();
         emf.close();
         assertNotNull(reactions);
@@ -63,7 +68,7 @@ public class ReactionTest {
     
     @Test
     public void editreaction(){
-        user = new User("user1", "email", "password", LocalDate.of(1996, Month.APRIL, 27), "user");
+        user = new User("user1", "email", "password", LocalDate.of(1996, Month.APRIL, 27), Role.user);
         Video v = new Video("video2", "Video for test purposes only", LocalDateTime.now(), user, VideoStatus.Public);
         user.postVideo(v);
         Reaction r = new Reaction("what a great test", user, v);
@@ -77,7 +82,7 @@ public class ReactionTest {
         reactionservice.edit(r);
         em.getTransaction().commit();
         
-        List<Reaction> reactions = reactionservice.getAllReactionsFromVideo(v);
+        List<Reaction> reactions = reactionservice.getAllReactionsFromVideo(v.getId());
         assertEquals(teststring, reactions.get(0).getText());
     }
 
@@ -87,12 +92,18 @@ public class ReactionTest {
         em = emf.createEntityManager();
         userdao = new UserDAOJPA();
         reactiondao = new ReactionDAOJPA();
+        videoDAO = new VideoDAOJPA();
         reactionservice = new ReactionService();
         userservice = new UserService();
+        videoService = new VideoService();
+        videoDAO.setEntityManager(em);
         reactiondao.setEntityManager(em);
         userdao.setEntityManager(em);
         userservice.setDAO(userdao);
         reactionservice.setDAO(reactiondao);
+        videoService.setDAO(videoDAO);
+        reactionservice.setVideoService(videoService);
+        
         try {
             new DatabaseCleaner(emf.createEntityManager()).clean();
         } catch (SQLException ex) {

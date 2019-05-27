@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-loginpage',
@@ -10,13 +11,20 @@ export class LoginpageComponent implements OnInit {
   username: string;
   password: string;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
+      // redirect if user already logged in
+      if (localStorage.getItem('currentUser') !== null) {
+          this.router.navigate(['../']);
+      }
   }
 
-  login(): void {
-    this.userService.login(this.username, this.password);
+  login() {
+    if (this.username !== '' && this.password !== '') {
+        this.userService.login(this.username, this.password)
+        this.router.navigate(['../']);
+    }
   }
 
 

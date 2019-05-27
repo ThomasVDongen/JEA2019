@@ -27,4 +27,10 @@ public interface UserDAO {
     User getUserByName(String name);
 
     User authenticate(String username, String password);
+
+    boolean getSubscribed(int userId, int check);
+
+    void unsubscribe(int userId, int currentUser);
+
+    long getSubCount(int user);
 }

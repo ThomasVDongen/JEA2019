@@ -1,6 +1,12 @@
-<p>Login:</p>
-<input [(ngModel)]="username" placeholder="name"/>
-<p>Password:</p>
-<input [(ngModel)]="password" type="password"/>
-<button (click)=""></button>
+<div class="md-form" class="login">
+    <h4 class="header">Login:</h4>
+    <input class="form-control" [(ngModel)]="username" placeholder="name"/>
+    <h4 class="center-block">Password:</h4>
+    <input class="form-control" [(ngModel)]="password" type="password"/>
+    <div><button  style="width: 250px" class="btn-default btn center-block" (click)="login()">Login</button></div>
+    <div style="overflow: hidden;white-space: nowrap;">
+        Don't have an account<a routerLink="/register" class="btn btn-link">Register</a>here.
+    </div>
+</div>
+
 

@@ -5,11 +5,11 @@
  */
 package tvd.youtube.services;
 
-import Filter.JWTTokenNeeded;
 import java.util.List;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import jwt.UserType;
 import tvd.youtube.DAO.JPA;
 import tvd.youtube.DAO.VideoDAO;
 import tvd.youtube.models.User;
@@ -29,31 +29,37 @@ public class VideoService {
     public VideoService() {
     }
 
-    @JWTTokenNeeded(UserType.USER)
+    @PermitAll()
     public void create(Video v) {
         dao.create(v);
     }
-    @JWTTokenNeeded(UserType.USER)
+
+    @PermitAll()
     public void remove(Video v) {
         dao.remove(v);
     }
-    @JWTTokenNeeded(UserType.USER)
+
+    @PermitAll()
     public void edit(Video v) {
         dao.edit(v);
     }
-    @JWTTokenNeeded(UserType.USER)
+
+    @PermitAll()
     public Video find(int id) {
         return dao.find(id);
     }
-    @JWTTokenNeeded(UserType.USER)
+
+    @PermitAll()
     public List<Video> getAllVideos() {
         return dao.getAllVideos();
     }
-    @JWTTokenNeeded(UserType.USER)
+
+    @PermitAll()
     public List<Video> getVideosByUser(User user) {
         return dao.getVideosByUser(user);
     }
-    @JWTTokenNeeded(UserType.USER)
+
+    @PermitAll()
     public void saveVideos(List<Video> videos) {
         dao.saveVideos(videos);
     }
@@ -61,9 +67,24 @@ public class VideoService {
     public void setDAO(VideoDAO dao) {
         this.dao = dao;
     }
-    @JWTTokenNeeded(UserType.USER)
+
+    @PermitAll()
     public List<Video> getAllPublic() {
         return dao.getAllPublic();
+    }
+
+    @PermitAll()
+    public List<Video> getTrending() {
+        return dao.getTrending();
+    }
+
+    @PermitAll()
+    public List<Video> getSubscriptions(User u) {
+        return dao.getSubscriptions(u);
+    }
+    @PermitAll()
+    public List<Video> search(String title) {
+        return dao.search(title);
     }
 
 }

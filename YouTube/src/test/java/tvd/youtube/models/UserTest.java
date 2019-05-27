@@ -15,6 +15,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import util.Role;
 import util.VideoStatus;
 
 /**
@@ -44,8 +45,8 @@ public class UserTest {
 
     @Test
     public void testSubscribeTo() {
-        User u = new User("user1", "test", "test", LocalDate.now(), "user");
-        User u2 = new User("user2", "test2", "test2", LocalDate.now(), "user");
+        User u = new User("user1", "test", "test", LocalDate.now(),Role.user);
+        User u2 = new User("user2", "test2", "test2", LocalDate.now(), Role.user);
         u2.subscribeTo(u);
         List<User> testSubscribers = new ArrayList<>();
         testSubscribers.add(u2);

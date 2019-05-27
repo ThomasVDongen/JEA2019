@@ -1,3 +1,26 @@
-<p>
-  profilepage works!
-</p>
+<div class="userinfo">
+  <h1>Channel name: {{selectedUser.name}}</h1>
+  <h4>Subscribers: {{selectedUser.subscriberCount}}</h4>
+  <div *ngIf="!sameUser && subscribed === false">
+    <input (click)="subscribe()" type="button" class="btn btn-default" value="Subscribe"/>
+  </div>
+  <div *ngIf="!sameUser && subscribed === true">
+    <input (click)="unsubscribe()" type="button" class="btn btn-default" value="Unsubscribe"/>
+  </div>
+</div>
+<div class="uservideos">
+  <h1 class="videoheader">Videos</h1>
+  <div *ngIf="userVideos.length === 0">No videos uploaded yet by this user</div>
+  <ul fxLayout="row" fxLayoutAlign="space-evenly">
+    <li *ngFor="let video of userVideos" class="videos">
+      <div>
+        <h3 (click)="selectVideo(video.id)" class="videotitle">{{video.name}}</h3>
+        <div class="info">
+          <p (click)="selectUser(video.uploaderId)">uploaded by: {{video.uploaderName}}</p>
+          <p>views: {{video.views}}</p>
+          <p>{{calculateTime(video.uploadTime)}}</p>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

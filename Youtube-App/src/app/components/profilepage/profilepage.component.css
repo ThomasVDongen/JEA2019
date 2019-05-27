@@ -1,0 +1,18 @@
+.userinfo {
+    margin-top: 5%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.videos{
+    border: 2px  solid black;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+
+.videoheader{
+    margin-top: 5%;
+}

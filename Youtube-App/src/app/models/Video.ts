@@ -6,8 +6,9 @@ export class Video {
     name: string;
     description: string;
     views: number;
-    uploadTime: DatePipe;
+    uploadTime: Date;
     uploaderName: string;
     uploaderId: number;
-    videoStatus: VideoStatus;
+    status: VideoStatus;
+    links: string[];
 }

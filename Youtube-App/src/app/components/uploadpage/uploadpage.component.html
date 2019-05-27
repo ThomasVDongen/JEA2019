@@ -1,3 +1,8 @@
-<p>
-  uploadpage works!
-</p>
+<div class="upload">
+  <h1 class="header">Name:</h1>
+  <input type="text" class="form-control" [(ngModel)]="name"/>
+  <h1>Description:</h1>
+  <textarea type="text" class="form-control" [(ngModel)]="description"></textarea>
+  <br>
+  <input type="button" class="btn btn-default" (click)="upload()" style="width: 500px" value="Upload"/>
+</div>

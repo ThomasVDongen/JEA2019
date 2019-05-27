@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,7 +25,9 @@ import util.VideoStatus;
 @Entity
 @Table(name = "video")
 public class Video {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String description;
@@ -33,14 +38,12 @@ public class Video {
     @ManyToOne(cascade = CascadeType.REMOVE)
     private User uploader;
     private VideoStatus status;
-    private int views;    
+    private int views;
 
     public Video() {
         this.reactions = new ArrayList<>();
         this.views = 0;
     }
-    
-    
 
     public Video(String name, String description, LocalDateTime uploadTime, User uploader, VideoStatus status) {
         this();
@@ -60,8 +63,6 @@ public class Video {
         this.uploader = uploader;
         this.status = status;
     }
-
-
 
     public int getId() {
         return id;
@@ -118,8 +119,8 @@ public class Video {
     public void setStatus(VideoStatus status) {
         this.status = status;
     }
-    
-    public void addReaction(Reaction r){
+
+    public void addReaction(Reaction r) {
         this.getReactions().add(r);
     }
 
@@ -131,4 +132,17 @@ public class Video {
         this.views = views;
     }
     
+    public void addView(){
+        this.views++;
+    }
+
+    @Override
+    public String toString() {
+        return "Video{" + "id=" + id + ", name=" + name + ", description=" + description + ", uploadTime=" + uploadTime + ", reactions=" + reactions + ", uploader=" + uploader + ", status=" + status + ", views=" + views + '}';
+    }
+    
+    
+
+
+
 }

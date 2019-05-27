@@ -15,6 +15,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import util.Role;
 import util.VideoStatus;
 
 /**
@@ -46,7 +47,7 @@ public class ReactionTest {
      */
     @Test
     public void testReact() {
-        User u = new User("user1", "test", "test", LocalDate.now(), "user");
+        User u = new User("user1", "test", "test", LocalDate.now(), Role.user);
         Video v = new Video("How to test reactions", "description", LocalDateTime.now(), u, VideoStatus.Public);
         Reaction r = new Reaction("Ben het echt niet eens met deze mening", u, v);
         Reaction instance = new Reaction("Wat een mooie video", u, v);

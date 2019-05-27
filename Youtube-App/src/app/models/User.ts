@@ -4,11 +4,12 @@ export class User  {
     id: number;
     name: string;
     email: string;
-    birthday: DatePipe;
+    birthday: number;
     role: string;
-    url: string;
     videoCount: number;
     subscriberCount: number;
     subscribedCount: number;
+    token: string;
+    links: string[];
 
 }
