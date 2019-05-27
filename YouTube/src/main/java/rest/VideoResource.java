@@ -70,7 +70,7 @@ public class VideoResource {
         try {
             VideoDTO v = new VideoDTO(vs.find(id));
             v.addLink(this.hateOSLink(uriInfo, "getVideo", v.getId()), "getVideo");
-            v.addLink(this.HateOSOwner(uriInfo, "getUser", v.getUploaderId()), "getUser");
+            v.addLink(this.HateOSOwner(uriInfo, "getUser", v.getUploaderId()), "getOwner");
             return Response.status(Response.Status.OK).entity(v).build();
         } catch (NotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
@@ -145,7 +145,7 @@ public class VideoResource {
         vs.edit(v);
         VideoDTO dto = new VideoDTO(vs.find(v.getId()));
         dto.addLink(this.hateOSLink(uriInfo, "getVideo", v.getId()), "getVideo");
-        dto.addLink(this.HateOSOwner(uriInfo, "getUser", dto.getUploaderId()), "getUser");
+        dto.addLink(this.HateOSOwner(uriInfo, "getUser", dto.getUploaderId()), "getOwner");
         return Response.ok(dto).build();
 
     }
@@ -217,7 +217,7 @@ public class VideoResource {
         for (Video v : videos) {
             VideoDTO dto = new VideoDTO(v);
             dto.addLink(this.hateOSLink(uriInfo, "getVideo", v.getId()), "getVideo");
-            dto.addLink(this.HateOSOwner(uriInfo, "getUser", dto.getUploaderId()), "getUser");
+            dto.addLink(this.HateOSOwner(uriInfo, "getUser", dto.getUploaderId()), "getOwner");
             dtos.add(dto);
         }
         return dtos;
