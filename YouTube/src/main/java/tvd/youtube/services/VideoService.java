@@ -7,7 +7,6 @@ package tvd.youtube.services;
 
 import java.util.List;
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import tvd.youtube.DAO.JPA;
